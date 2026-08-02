@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "247911586643",
+    "project_id": "crop-shield-ai-hamna-8b574",
+    "storage_bucket": "crop-shield-ai-hamna-8b574.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247911586643:android:8e1fa0a14041a7e7b4dfa6",
+        "android_client_info": {
+          "package_name": "com.example.crop_shield_ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOIvzFPlzFoCoj-ReyVP6B_K9i6RZq1Us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
