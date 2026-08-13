@@ -6,6 +6,8 @@
 //   instead of typing (most farmers won't type comfortably).
 // - Shows "already submitted" state if they come back to this scan.
 
+import 'package:crop_shield_ai/theme/app_colors.dart';
+import 'package:crop_shield_ai/theme/app_spacing.dart';
 import 'package:flutter/material.dart';
 import 'feedback_entry.dart';
 import 'feedback_service.dart';
@@ -75,50 +77,51 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
       return const SizedBox.shrink();
     }
 
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: _alreadySubmitted ? _buildThankYou() : _buildAskingCard(),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: _alreadySubmitted ? _buildThankYou(context) : _buildAskingCard(context),
     );
   }
 
-  Widget _buildAskingCard() {
+  Widget _buildAskingCard(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
+        Text(
           'Was this diagnosis correct?',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 16),
         if (!_showDiseasePicker) ...[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _bigChoiceButton(
-                icon: Icons.thumb_up_alt_rounded,
-                label: 'Yes',
-                color: Colors.green,
-                onTap: () => _submit(wasCorrect: true),
+              Expanded(
+                child: _bigChoiceButton(
+                  icon: Icons.thumb_up_alt_rounded,
+                  label: 'Yes',
+                  color: AppColors.success,
+                  onTap: () => _submit(wasCorrect: true),
+                ),
               ),
-              _bigChoiceButton(
-                icon: Icons.thumb_down_alt_rounded,
-                label: 'No',
-                color: Colors.red,
-                onTap: () => setState(() => _showDiseasePicker = true),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _bigChoiceButton(
+                  icon: Icons.thumb_down_alt_rounded,
+                  label: 'No',
+                  color: AppColors.danger,
+                  onTap: () => setState(() => _showDiseasePicker = true),
+                ),
               ),
             ],
           ),
         ] else ...[
-          const Text(
+          Text(
             'What is the correct disease?',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: Colors.black87),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: AppColors.textSecondary,
+                ),
           ),
           const SizedBox(height: 12),
           Wrap(
@@ -131,24 +134,14 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                   .map(
                 (name) {
                   return ActionChip(
-                    label: Text(name, style: const TextStyle(fontSize: 14)),
-                    backgroundColor: Colors.orange.shade50,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: Colors.orange.shade200),
-                    ),
+                    label: Text(name),
                     onPressed: () =>
                         _submit(wasCorrect: false, correctedDisease: name),
                   );
                 },
               ),
               ActionChip(
-                label: const Text('Not sure', style: TextStyle(fontSize: 14)),
-                backgroundColor: Colors.grey.shade200,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(color: Colors.grey.shade400),
-                ),
+                label: const Text('Not sure'),
                 onPressed: () => _submit(wasCorrect: false),
               ),
             ],
@@ -163,16 +156,16 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
     );
   }
 
-  Widget _buildThankYou() {
-    return const Row(
+  Widget _buildThankYou(BuildContext context) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(Icons.check_circle, color: Colors.green, size: 26),
-        SizedBox(width: 10),
+        const Icon(Icons.check_circle_rounded, color: AppColors.success, size: 22),
+        const SizedBox(width: 10),
         Flexible(
           child: Text(
             'Thanks! Your feedback is saved.',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
       ],
@@ -187,25 +180,24 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        width: 120,
-        padding: const EdgeInsets.symmetric(vertical: 16),
+      borderRadius: BorderRadius.circular(AppRadius.sm),
+      child: Ink(
+        padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color, width: 1.5),
+          color: color.withValues(alpha: 0.08),
+          borderRadius: BorderRadius.circular(AppRadius.sm),
+          border: Border.all(color: color.withValues(alpha: 0.35)),
         ),
         child: Column(
           children: [
-            Icon(icon, color: color, size: 34),
+            Icon(icon, color: color, size: 28),
             const SizedBox(height: 6),
             Text(
               label,
               style: TextStyle(
                 color: color,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
               ),
             ),
           ],

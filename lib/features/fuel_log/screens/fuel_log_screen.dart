@@ -5,6 +5,7 @@
 // a card drills into that field's full entry list. FAB adds a new
 // fill-up.
 
+import 'package:crop_shield_ai/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../models/fuel_entry.dart';
@@ -119,15 +120,8 @@ class _OverallSummaryCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).colorScheme.primary,
-            Theme.of(context).colorScheme.primaryContainer,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(20),
+        color: AppColors.forest,
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,15 +181,13 @@ class _FieldSummaryCard extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 46,
-                height: 46,
+                width: 44,
+                height: 44,
                 decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .secondaryContainer,
+                  color: AppColors.moss.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.grass_rounded),
+                child: const Icon(Icons.grass_rounded, color: AppColors.moss),
               ),
               const SizedBox(width: 14),
               Expanded(

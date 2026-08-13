@@ -3,6 +3,8 @@ import 'package:crop_shield_ai/models/scan_result.dart';
 import 'package:crop_shield_ai/router/app_routes.dart';
 import 'package:crop_shield_ai/services/symptom_matcher_service.dart';
 import 'package:crop_shield_ai/theme/app_colors.dart';
+import 'package:crop_shield_ai/theme/app_spacing.dart';
+import 'package:crop_shield_ai/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -76,157 +78,97 @@ class _TextInputScreenState extends State<TextInputScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cream,
       appBar: AppBar(
-        backgroundColor: AppColors.cream,
-        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded,
-              color: AppColors.textPrimary),
+          icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () => context.pop(),
         ),
-        title: const Text(
-          'Text Input',
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: const Text('Text Input'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Describe your crop symptoms',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.pageH,
+            8,
+            AppSpacing.pageH,
+            16,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Describe your crop symptoms',
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Type what you observe — yellowing, spots, wilting, or any other visible signs.',
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.textMuted,
-              ),
-            ),
-            const SizedBox(height: 16),
-            // Hint chips
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                'brown spots',
-                'yellow leaves',
-                'white powder',
-                'curling leaves',
-                'black spots',
-                'wilting',
-              ].map((hint) => GestureDetector(
-                onTap: () {
-                  final current = _controller.text;
-                  _controller.text = current.isEmpty
-                      ? hint
-                      : '$current, $hint';
-                  _controller.selection = TextSelection.fromPosition(
-                    TextPosition(offset: _controller.text.length),
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: AppColors.leaf.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                        color: AppColors.sage.withOpacity(0.4)),
-                  ),
-                  child: Text(
-                    '+ $hint',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.moss,
-                      fontWeight: FontWeight.w500,
+              const SizedBox(height: 8),
+              Text(
+                'Type what you observe — yellowing, spots, wilting, or any other visible signs.',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.textMuted,
                     ),
-                  ),
-                ),
-              )).toList(),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.parchment, width: 1.5),
               ),
-              child: TextField(
-                controller: _controller,
-                maxLines: 7,
-                style: const TextStyle(
-                  color: AppColors.textPrimary,
-                  fontSize: 15,
-                ),
-                decoration: const InputDecoration(
-                  hintText:
-                      'e.g. Leaves have brown spots with yellow edges, plant looks wilted...',
-                  hintStyle:
-                      TextStyle(color: AppColors.textMuted, fontSize: 14),
-                  contentPadding: EdgeInsets.all(16),
-                  border: InputBorder.none,
-                ),
+              const SizedBox(height: 16),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  'brown spots',
+                  'yellow leaves',
+                  'white powder',
+                  'curling leaves',
+                  'black spots',
+                  'wilting',
+                ].map((hint) {
+                  return ActionChip(
+                    label: Text('+ $hint'),
+                    onPressed: () {
+                      final current = _controller.text;
+                      _controller.text = current.isEmpty ? hint : '$current, $hint';
+                      _controller.selection = TextSelection.fromPosition(
+                        TextPosition(offset: _controller.text.length),
+                      );
+                    },
+                  );
+                }).toList(),
               ),
-            ),
-            const SizedBox(height: 8),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                '${_controller.text.trim().split(' ').where((w) => w.isNotEmpty).length} words',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: AppColors.textMuted,
-                ),
-              ),
-            ),
-            const Spacer(),
-            SizedBox(
-              width: double.infinity,
-              height: 52,
-              child: ElevatedButton(
-                onPressed: (_hasText && !_isAnalyzing)
-                    ? _analyzeSymptoms
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.forest,
-                  disabledBackgroundColor: AppColors.parchment,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-                child: _isAnalyzing
-                    ? const SizedBox(
-                        width: 22,
-                        height: 22,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2.5,
-                        ),
-                      )
-                    : const Text(
-                        'Analyze Symptoms',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  maxLines: null,
+                  expands: true,
+                  textAlignVertical: TextAlignVertical.top,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: AppColors.textPrimary,
                       ),
+                  decoration: const InputDecoration(
+                    hintText:
+                        'e.g. Leaves have brown spots with yellow edges, plant looks wilted...',
+                    alignLabelWithHint: true,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-          ],
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  '${_controller.text.trim().split(' ').where((w) => w.isNotEmpty).length} words',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 12,
+                        color: AppColors.textMuted,
+                      ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              PrimaryButton(
+                label: 'Analyze Symptoms',
+                icon: Icons.biotech_rounded,
+                isLoading: _isAnalyzing,
+                onPressed: (_hasText && !_isAnalyzing) ? _analyzeSymptoms : null,
+                backgroundColor: AppColors.forest,
+              ),
+            ],
+          ),
         ),
       ),
     );

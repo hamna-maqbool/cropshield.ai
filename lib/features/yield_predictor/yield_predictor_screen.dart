@@ -89,14 +89,14 @@ class _YieldPredictorScreenState extends State<YieldPredictorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.parchment,
+      backgroundColor: AppColors.cream,
       appBar: AppBar(
-        backgroundColor: AppColors.parchment,
+        backgroundColor: AppColors.cream,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         title: Text(
           'Yield & Profit Predictor',
-          style: GoogleFonts.fraunces(
+          style: GoogleFonts.dmSans(
             fontSize: 18,
             fontWeight: FontWeight.w600,
             color: AppColors.forest,
@@ -154,7 +154,7 @@ class _YieldPredictorScreenState extends State<YieldPredictorScreen> {
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       '≈ ${_areaInAcres.toStringAsFixed(2)} acres',
-                      style: GoogleFonts.manrope(
+                      style: GoogleFonts.dmSans(
                         fontSize: 12,
                         color: AppColors.textMuted,
                       ),
@@ -236,7 +236,7 @@ class _YieldPredictorScreenState extends State<YieldPredictorScreen> {
               onPressed: () => setState(() => _costsExpanded = !_costsExpanded),
               child: Text(
                 _costsExpanded ? 'Hide' : 'Edit',
-                style: GoogleFonts.manrope(
+                style: GoogleFonts.dmSans(
                   fontWeight: FontWeight.w600,
                   color: AppColors.moss,
                 ),
@@ -249,14 +249,14 @@ class _YieldPredictorScreenState extends State<YieldPredictorScreen> {
                   children: [
                     Text(
                       'Estimated total',
-                      style: GoogleFonts.manrope(
+                      style: GoogleFonts.dmSans(
                         fontSize: 13,
                         color: AppColors.textMuted,
                       ),
                     ),
                     Text(
                       'Rs ${(_seedCost + _fertilizerCost + _pesticideCost + _laborCost + _otherCost).toStringAsFixed(0)} / acre',
-                      style: GoogleFonts.manrope(
+                      style: GoogleFonts.dmSans(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                         color: AppColors.forest,
@@ -311,7 +311,7 @@ class _YieldPredictorScreenState extends State<YieldPredictorScreen> {
                 Expanded(
                   child: Text(
                     cropBaselines[_crop]!.sourceNote,
-                    style: GoogleFonts.manrope(
+                    style: GoogleFonts.dmSans(
                       fontSize: 11,
                       color: AppColors.textMuted,
                       height: 1.4,
@@ -341,7 +341,7 @@ class _YieldPredictorScreenState extends State<YieldPredictorScreen> {
               ),
               child: Text(
                 'Calculate Yield & Profit',
-                style: GoogleFonts.manrope(
+                style: GoogleFonts.dmSans(
                   fontSize: 15.5,
                   fontWeight: FontWeight.w700,
                 ),
@@ -377,14 +377,8 @@ class _SectionCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.parchment),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -394,20 +388,20 @@ class _SectionCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.manrope(
+                style: GoogleFonts.dmSans(
                   fontSize: 14.5,
                   fontWeight: FontWeight.w700,
                   color: const Color(0xFF1F2921),
                 ),
               ),
-              if (trailing != null) trailing!,
+              ?trailing,
             ],
           ),
           if (subtitle != null) ...[
             const SizedBox(height: 3),
             Text(
               subtitle!,
-              style: GoogleFonts.manrope(
+              style: GoogleFonts.dmSans(
                 fontSize: 11.5,
                 color: AppColors.textMuted,
               ),
@@ -458,7 +452,7 @@ class _ChipRow<T> extends StatelessWidget {
             ),
             child: Text(
               labelBuilder(opt),
-              style: GoogleFonts.manrope(
+              style: GoogleFonts.dmSans(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: selected ? Colors.white : const Color(0xFF3A4A3D),
@@ -507,7 +501,7 @@ class _UnitToggle extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           label,
-          style: GoogleFonts.manrope(
+          style: GoogleFonts.dmSans(
             fontSize: 12.5,
             fontWeight: FontWeight.w700,
             color: selected ? AppColors.forest : AppColors.textMuted,
@@ -549,7 +543,7 @@ class _Stepper extends StatelessWidget {
             children: [
               Text(
                 '${value % 1 == 0 ? value.toStringAsFixed(0) : value.toStringAsFixed(1)} $suffix',
-                style: GoogleFonts.fraunces(
+                style: GoogleFonts.dmSans(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: AppColors.forest,
@@ -617,7 +611,7 @@ class _MoneyField extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style: GoogleFonts.manrope(fontSize: 13, color: const Color(0xFF3A4A3D)),
+            style: GoogleFonts.dmSans(fontSize: 13, color: const Color(0xFF3A4A3D)),
           ),
         ),
         SizedBox(
@@ -626,7 +620,7 @@ class _MoneyField extends StatelessWidget {
             controller: controller,
             textAlign: TextAlign.right,
             keyboardType: const TextInputType.numberWithOptions(decimal: false),
-            style: GoogleFonts.manrope(
+            style: GoogleFonts.dmSans(
               fontSize: 14,
               fontWeight: FontWeight.w700,
               color: AppColors.forest,

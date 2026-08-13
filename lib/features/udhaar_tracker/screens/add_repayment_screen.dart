@@ -5,6 +5,7 @@
 // because the fields genuinely differ — a repayment has no item,
 // quantity, or category, just an amount.
 
+import 'package:crop_shield_ai/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../models/udhaar_models.dart';
@@ -77,7 +78,7 @@ class _AddRepaymentScreenState extends State<AddRepaymentScreen> {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                color: AppColors.moss.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -98,7 +99,6 @@ class _AddRepaymentScreenState extends State<AddRepaymentScreen> {
               decoration: const InputDecoration(
                 labelText: 'Amount paid',
                 prefixIcon: Icon(Icons.payments_rounded),
-                border: OutlineInputBorder(),
               ),
               validator: (v) {
                 final n = double.tryParse(v ?? '');
@@ -128,7 +128,6 @@ class _AddRepaymentScreenState extends State<AddRepaymentScreen> {
               maxLines: 2,
               decoration: const InputDecoration(
                 labelText: 'Note (optional)',
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 24),

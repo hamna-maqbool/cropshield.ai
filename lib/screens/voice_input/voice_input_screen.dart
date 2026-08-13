@@ -3,6 +3,8 @@ import 'package:crop_shield_ai/models/scan_result.dart';
 import 'package:crop_shield_ai/router/app_routes.dart';
 import 'package:crop_shield_ai/services/symptom_matcher_service.dart';
 import 'package:crop_shield_ai/theme/app_colors.dart';
+import 'package:crop_shield_ai/theme/app_spacing.dart';
+import 'package:crop_shield_ai/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -135,181 +137,131 @@ class _VoiceInputScreenState extends State<VoiceInputScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cream,
       appBar: AppBar(
-        backgroundColor: AppColors.cream,
-        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded,
-              color: AppColors.textPrimary),
+          icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () => context.pop(),
         ),
-        title: const Text(
-          'Voice Input',
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: const Text('Voice Input'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Speak your crop symptoms',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.pageH,
+            8,
+            AppSpacing.pageH,
+            16,
+          ),
+          child: Column(
+            children: [
+              Text(
+                'Speak your crop symptoms',
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Tap the microphone and describe what you observe on your crop.',
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.textMuted,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 48),
-            ScaleTransition(
-              scale: _isListening
-                  ? _scaleAnim
-                  : const AlwaysStoppedAnimation(1.0),
-              child: GestureDetector(
-                onTap: _toggleListening,
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: _isListening
-                        ? AppColors.danger
-                        : AppColors.forest,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: (_isListening
-                                ? AppColors.danger
-                                : AppColors.forest)
-                            .withOpacity(0.3),
-                        blurRadius: 20,
-                        spreadRadius: 4,
-                      ),
-                    ],
-                  ),
-                  child: Icon(
-                    _isListening
-                        ? Icons.stop_rounded
-                        : Icons.mic_rounded,
-                    color: Colors.white,
-                    size: 44,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              _isListening
-                  ? 'Listening... tap to stop'
-                  : _speechAvailable
-                      ? 'Tap to speak'
-                      : 'Speech not available',
-              style: TextStyle(
-                fontSize: 14,
-                color: _isListening
-                    ? AppColors.danger
-                    : AppColors.textMuted,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 32),
-            if (_recognizedText.isNotEmpty) ...[
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border:
-                      Border.all(color: AppColors.parchment, width: 1.5),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Recognized text',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: AppColors.textMuted,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: _clearText,
-                          child: const Icon(
-                            Icons.close_rounded,
-                            size: 18,
-                            color: AppColors.textMuted,
-                          ),
-                        ),
-                      ],
+              const SizedBox(height: 8),
+              Text(
+                'Tap the microphone and describe what you observe on your crop.',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.textMuted,
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      _recognizedText,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: AppColors.textPrimary,
-                      ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 40),
+              ScaleTransition(
+                scale: _isListening
+                    ? _scaleAnim
+                    : const AlwaysStoppedAnimation(1.0),
+                child: GestureDetector(
+                  onTap: _toggleListening,
+                  child: Container(
+                    width: 96,
+                    height: 96,
+                    decoration: BoxDecoration(
+                      color: _isListening ? AppColors.danger : AppColors.forest,
+                      shape: BoxShape.circle,
                     ),
-                  ],
+                    child: Icon(
+                      _isListening ? Icons.stop_rounded : Icons.mic_rounded,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
-            ],
-            const Spacer(),
-            SizedBox(
-              width: double.infinity,
-              height: 52,
-              child: ElevatedButton(
+              Text(
+                _isListening
+                    ? 'Listening... tap to stop'
+                    : _speechAvailable
+                        ? 'Tap to speak'
+                        : 'Speech not available',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: _isListening
+                          ? AppColors.danger
+                          : AppColors.textMuted,
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              const SizedBox(height: 28),
+              if (_recognizedText.isNotEmpty) ...[
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(AppRadius.md),
+                    border: Border.all(color: AppColors.parchment),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Recognized text',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  fontSize: 12,
+                                  color: AppColors.textMuted,
+                                ),
+                          ),
+                          GestureDetector(
+                            onTap: _clearText,
+                            child: const Icon(
+                              Icons.close_rounded,
+                              size: 18,
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        _recognizedText,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: AppColors.textPrimary,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
+              const Spacer(),
+              PrimaryButton(
+                label: 'Analyze Symptoms',
+                icon: Icons.biotech_rounded,
+                isLoading: _isAnalyzing,
                 onPressed: (_recognizedText.isNotEmpty && !_isAnalyzing)
                     ? _analyzeSymptoms
                     : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.forest,
-                  disabledBackgroundColor: AppColors.parchment,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-                child: _isAnalyzing
-                    ? const SizedBox(
-                        width: 22,
-                        height: 22,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2.5,
-                        ),
-                      )
-                    : const Text(
-                        'Analyze Symptoms',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                backgroundColor: AppColors.forest,
               ),
-            ),
-            const SizedBox(height: 16),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -5,6 +5,7 @@
 // Tapping a dealer opens their full ledger. A dealer with an upcoming
 // due date is flagged so the farmer notices it before it's overdue.
 
+import 'package:crop_shield_ai/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../models/udhaar_models.dart';
@@ -122,14 +123,8 @@ class _OverallDebtCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: isClear
-              ? [Colors.green.shade600, Colors.green.shade400]
-              : [Colors.deepOrange.shade700, Colors.deepOrange.shade400],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(20),
+        color: isClear ? AppColors.success : AppColors.soil,
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,12 +189,12 @@ class _DealerCard extends StatelessWidget {
                 height: 46,
                 decoration: BoxDecoration(
                   color: isSettled
-                      ? Colors.green.withOpacity(0.12)
-                      : Colors.deepOrange.withOpacity(0.12),
+                      ? AppColors.success.withValues(alpha: 0.12)
+                      : AppColors.soil.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(Icons.store_rounded,
-                    color: isSettled ? Colors.green : Colors.deepOrange),
+                    color: isSettled ? AppColors.success : AppColors.soil),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -216,7 +211,7 @@ class _DealerCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         color: dueSoon
-                            ? Colors.deepOrange
+                            ? AppColors.clay
                             : Theme.of(context).hintColor,
                         fontWeight: dueSoon ? FontWeight.w600 : FontWeight.normal,
                       ),
@@ -232,7 +227,7 @@ class _DealerCard extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
-                      color: isSettled ? Colors.green : Colors.deepOrange,
+                      color: isSettled ? AppColors.success : AppColors.soil,
                     ),
                   ),
                   const Icon(Icons.chevron_right_rounded, size: 18),

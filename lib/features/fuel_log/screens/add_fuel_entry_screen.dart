@@ -5,6 +5,7 @@
 // field/tractor are free-text with suggestions from past entries so
 // the same names get reused (avoids "Field A" vs "field a" mismatches).
 
+import 'package:crop_shield_ai/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../models/fuel_entry.dart';
@@ -143,7 +144,6 @@ class _AddFuelEntryScreenState extends State<AddFuelEntryScreen> {
                     decoration: const InputDecoration(
                       labelText: 'Liters',
                       prefixIcon: Icon(Icons.local_gas_station_rounded),
-                      border: OutlineInputBorder(),
                     ),
                     validator: (v) {
                       final n = double.tryParse(v ?? '');
@@ -162,7 +162,6 @@ class _AddFuelEntryScreenState extends State<AddFuelEntryScreen> {
                     decoration: const InputDecoration(
                       labelText: 'Price / Liter',
                       prefixText: 'Rs ',
-                      border: OutlineInputBorder(),
                     ),
                     validator: (v) {
                       final n = double.tryParse(v ?? '');
@@ -178,7 +177,7 @@ class _AddFuelEntryScreenState extends State<AddFuelEntryScreen> {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: AppColors.moss.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -212,7 +211,6 @@ class _AddFuelEntryScreenState extends State<AddFuelEntryScreen> {
               decoration: const InputDecoration(
                 labelText: 'Worker name (optional)',
                 prefixIcon: Icon(Icons.person_rounded),
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 14),
@@ -221,7 +219,6 @@ class _AddFuelEntryScreenState extends State<AddFuelEntryScreen> {
               decoration: const InputDecoration(
                 labelText: 'Fuel station (optional)',
                 prefixIcon: Icon(Icons.local_gas_station_outlined),
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 14),
@@ -231,7 +228,6 @@ class _AddFuelEntryScreenState extends State<AddFuelEntryScreen> {
               decoration: const InputDecoration(
                 labelText: 'Note (optional)',
                 prefixIcon: Icon(Icons.note_alt_rounded),
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 24),
@@ -284,7 +280,6 @@ class _AutocompleteField extends StatelessWidget {
           decoration: InputDecoration(
             labelText: label,
             prefixIcon: Icon(icon),
-            border: const OutlineInputBorder(),
           ),
           validator: validator,
         ),

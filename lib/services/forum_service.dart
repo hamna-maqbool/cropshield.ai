@@ -32,7 +32,7 @@ class ForumService {
         .snapshots()
         .map((snap) => snap.docs
             .map((d) =>
-                ForumComment.fromMap(d.id, d.data() as Map<String, dynamic>))
+                ForumComment.fromMap(d.id, d.data()))
             .toList());
   }
 

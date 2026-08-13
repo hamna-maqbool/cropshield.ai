@@ -76,17 +76,15 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               decoration: const InputDecoration(
                 labelText: 'Title',
                 hintText: 'e.g. Yellow spots on wheat leaves',
-                border: OutlineInputBorder(),
               ),
               validator: (v) =>
                   (v == null || v.trim().isEmpty) ? 'Title is required' : null,
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
-              value: _cropType,
+              initialValue: _cropType,
               decoration: const InputDecoration(
                 labelText: 'Crop Type',
-                border: OutlineInputBorder(),
               ),
               items: _cropOptions
                   .map((c) => DropdownMenuItem(value: c, child: Text(c)))
@@ -99,7 +97,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               maxLines: 4,
               decoration: const InputDecoration(
                 labelText: 'Describe your problem',
-                border: OutlineInputBorder(),
               ),
               validator: (v) => (v == null || v.trim().isEmpty)
                   ? 'Description is required'

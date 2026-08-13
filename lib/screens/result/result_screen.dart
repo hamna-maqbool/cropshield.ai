@@ -35,7 +35,7 @@ class ResultScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _ResultHeroCard(
+              _ResultHero(
                 diseaseName: result.diseaseName,
                 confidencePercent: confidencePercent,
                 inputLabel: result.inputMethod.label,
@@ -43,7 +43,7 @@ class ResultScreen extends StatelessWidget {
               if (result.imagePath != null) ...[
                 const SizedBox(height: 20),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(16),
                   child: AspectRatio(
                     aspectRatio: 4 / 3,
                     child: Image.file(
@@ -137,8 +137,8 @@ class ResultScreen extends StatelessWidget {
   }
 }
 
-class _ResultHeroCard extends StatelessWidget {
-  const _ResultHeroCard({
+class _ResultHero extends StatelessWidget {
+  const _ResultHero({
     required this.diseaseName,
     required this.confidencePercent,
     required this.inputLabel,
@@ -152,55 +152,37 @@ class _ResultHeroCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(22),
+      padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [AppColors.forest, AppColors.moss],
-        ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.forest.withValues(alpha: 0.28),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
-        ],
+        color: AppColors.forest,
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              'Detected condition',
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: AppColors.leaf,
-                    fontSize: 11,
-                  ),
-            ),
+          Text(
+            'Detected condition',
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: AppColors.leaf,
+                  fontSize: 11,
+                ),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 8),
           Text(
             diseaseName,
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   color: Colors.white,
                 ),
           ),
-          const SizedBox(height: 16),
-          Row(
+          const SizedBox(height: 14),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: [
               _StatChip(
                 label: '$confidencePercent% confidence',
                 icon: Icons.verified_outlined,
               ),
-              const SizedBox(width: 8),
               _StatChip(
                 label: inputLabel,
                 icon: Icons.layers_outlined,

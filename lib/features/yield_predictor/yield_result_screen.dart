@@ -32,14 +32,14 @@ class _YieldResultScreenState extends State<YieldResultScreen> {
     final profitable = r.profit >= 0;
 
     return Scaffold(
-      backgroundColor: AppColors.parchment,
+      backgroundColor: AppColors.cream,
       appBar: AppBar(
-        backgroundColor: AppColors.parchment,
+        backgroundColor: AppColors.cream,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         title: Text(
           'Your Forecast',
-          style: GoogleFonts.fraunces(
+          style: GoogleFonts.dmSans(
             fontSize: 18,
             fontWeight: FontWeight.w600,
             color: AppColors.forest,
@@ -123,7 +123,7 @@ class _YieldResultScreenState extends State<YieldResultScreen> {
                 Expanded(
                   child: Text(
                     r.sourceNote,
-                    style: GoogleFonts.manrope(
+                    style: GoogleFonts.dmSans(
                       fontSize: 11.5,
                       color: AppColors.textMuted,
                       height: 1.4,
@@ -140,7 +140,7 @@ class _YieldResultScreenState extends State<YieldResultScreen> {
               'This is an estimate based on regional averages and your inputs. '
               'Actual results depend on weather, pest pressure, and field '
               'conditions during the season.',
-              style: GoogleFonts.manrope(
+              style: GoogleFonts.dmSans(
                 fontSize: 11,
                 color: AppColors.textMuted,
                 height: 1.4,
@@ -174,16 +174,12 @@ class _HeroCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(28),
+      borderRadius: BorderRadius.circular(16),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.fromLTRB(22, 26, 22, 26),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [AppColors.forest, AppColors.moss],
-          ),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+        decoration: const BoxDecoration(
+          color: AppColors.forest,
         ),
         child: Stack(
           clipBehavior: Clip.none,
@@ -205,7 +201,7 @@ class _HeroCard extends StatelessWidget {
               children: [
                 Text(
                   '$cropLabel · ${areaInAcres.toStringAsFixed(1)} acres',
-                  style: GoogleFonts.manrope(
+                  style: GoogleFonts.dmSans(
                     color: Colors.white70,
                     fontSize: 12.5,
                     fontWeight: FontWeight.w600,
@@ -214,7 +210,7 @@ class _HeroCard extends StatelessWidget {
                 const SizedBox(height: 18),
                 Text(
                   'Estimated Yield',
-                  style: GoogleFonts.manrope(
+                  style: GoogleFonts.dmSans(
                     color: Colors.white60,
                     fontSize: 11.5,
                   ),
@@ -222,7 +218,7 @@ class _HeroCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   '${totalYieldMaunds.toStringAsFixed(1)} maunds',
-                  style: GoogleFonts.fraunces(
+                  style: GoogleFonts.dmSans(
                     color: Colors.white,
                     fontSize: 32,
                     fontWeight: FontWeight.w600,
@@ -234,7 +230,7 @@ class _HeroCard extends StatelessWidget {
                 const SizedBox(height: 18),
                 Text(
                   profitable ? 'Estimated Profit' : 'Estimated Loss',
-                  style: GoogleFonts.manrope(
+                  style: GoogleFonts.dmSans(
                     color: Colors.white60,
                     fontSize: 11.5,
                   ),
@@ -252,7 +248,7 @@ class _HeroCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       moneyFormatter(profit),
-                      style: GoogleFonts.fraunces(
+                      style: GoogleFonts.dmSans(
                         color: Colors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.w600,
@@ -288,14 +284,8 @@ class _MetricTile extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.parchment),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -312,7 +302,7 @@ class _MetricTile extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             value,
-            style: GoogleFonts.fraunces(
+            style: GoogleFonts.dmSans(
               fontSize: 16.5,
               fontWeight: FontWeight.w600,
               color: const Color(0xFF1F2921),
@@ -321,7 +311,7 @@ class _MetricTile extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             label,
-            style: GoogleFonts.manrope(fontSize: 11.5, color: AppColors.textMuted),
+            style: GoogleFonts.dmSans(fontSize: 11.5, color: AppColors.textMuted),
           ),
         ],
       ),
@@ -363,7 +353,7 @@ class _BreakdownCard extends StatelessWidget {
                   Expanded(
                     child: Text(
                       'How we calculated this',
-                      style: GoogleFonts.manrope(
+                      style: GoogleFonts.dmSans(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                         color: const Color(0xFF1F2921),
@@ -413,7 +403,7 @@ class _BreakdownCard extends StatelessWidget {
                                   children: [
                                     Text(
                                       step.label,
-                                      style: GoogleFonts.manrope(
+                                      style: GoogleFonts.dmSans(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w600,
                                         color: const Color(0xFF3A4A3D),
@@ -421,7 +411,7 @@ class _BreakdownCard extends StatelessWidget {
                                     ),
                                     Text(
                                       '×${step.multiplier.toStringAsFixed(2)}',
-                                      style: GoogleFonts.manrope(
+                                      style: GoogleFonts.dmSans(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w700,
                                         color: step.multiplier >= 1.0
@@ -433,7 +423,7 @@ class _BreakdownCard extends StatelessWidget {
                                 ),
                                 Text(
                                   step.note,
-                                  style: GoogleFonts.manrope(
+                                  style: GoogleFonts.dmSans(
                                     fontSize: 11,
                                     color: AppColors.textMuted,
                                   ),
@@ -450,7 +440,7 @@ class _BreakdownCard extends StatelessWidget {
                     children: [
                       Text(
                         'Final yield per acre',
-                        style: GoogleFonts.manrope(
+                        style: GoogleFonts.dmSans(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
                           color: AppColors.forest,
@@ -458,7 +448,7 @@ class _BreakdownCard extends StatelessWidget {
                       ),
                       Text(
                         '${result.adjustedYieldPerAcre.toStringAsFixed(1)} maunds',
-                        style: GoogleFonts.manrope(
+                        style: GoogleFonts.dmSans(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
                           color: AppColors.forest,

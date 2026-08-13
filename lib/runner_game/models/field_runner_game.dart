@@ -8,19 +8,18 @@
 
 import 'dart:math';
 import 'dart:ui';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/particles.dart';
 import 'package:flutter/material.dart' show Colors;
 
-import 'components/crop_row_background.dart';
-import 'components/falling_item_component.dart';
-import 'components/game_items.dart';
-import 'components/hud_component.dart';
-import 'components/player_component.dart';
-import 'models/runner_enums.dart';
-import 'runner_service.dart';
+import '../components/crop_row_background.dart';
+import '../components/falling_item_component.dart';
+import '../components/game_items.dart';
+import '../components/hud_component.dart';
+import '../components/player_component.dart';
+import 'runner_enums.dart';
+import '../runner_service.dart';
 
 class FieldRunnerGame extends FlameGame with HasCollisionDetection {
   FieldRunnerGame({required this.onGameOver});

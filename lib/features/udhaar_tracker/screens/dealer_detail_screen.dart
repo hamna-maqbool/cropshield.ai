@@ -5,6 +5,7 @@
 // computed for display (recomputed from full history each time, not
 // stored, to guarantee correctness even after deletions).
 
+import 'package:crop_shield_ai/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../models/udhaar_models.dart';
@@ -110,7 +111,7 @@ class _DealerDetailScreenState extends State<DealerDetailScreen> {
                 onPressed: () => _addRepayment(balance),
                 icon: const Icon(Icons.payments_rounded),
                 label: const Text('Repay'),
-                backgroundColor: Colors.green,
+                backgroundColor: AppColors.success,
               ),
               const SizedBox(width: 12),
               FloatingActionButton.extended(
@@ -141,12 +142,11 @@ class _BalanceHeader extends StatelessWidget {
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: isSettled
-            ? Colors.green.withOpacity(0.1)
-            : Colors.deepOrange.withOpacity(0.1),
+            ? AppColors.success.withValues(alpha: 0.1)
+            : AppColors.soil.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSettled ? Colors.green : Colors.deepOrange,
-          width: 1,
+          color: isSettled ? AppColors.success : AppColors.soil,
         ),
       ),
       child: Row(
@@ -159,7 +159,7 @@ class _BalanceHeader extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
-              color: isSettled ? Colors.green : Colors.deepOrange,
+              color: isSettled ? AppColors.success : AppColors.soil,
             ),
           ),
         ],
@@ -191,7 +191,7 @@ class _LedgerTile extends StatelessWidget {
           row.isCredit
               ? Icons.add_shopping_cart_rounded
               : Icons.payments_rounded,
-          color: row.isCredit ? Colors.deepOrange : Colors.green,
+          color: row.isCredit ? AppColors.soil : AppColors.success,
         ),
         title: Text(row.title),
         subtitle: Text('$dateStr · ${row.subtitle}'
@@ -200,7 +200,7 @@ class _LedgerTile extends StatelessWidget {
           '${row.isCredit ? '+' : '-'}${row.amount.toStringAsFixed(0)}',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: row.isCredit ? Colors.deepOrange : Colors.green,
+            color: row.isCredit ? AppColors.soil : AppColors.success,
           ),
         ),
       ),

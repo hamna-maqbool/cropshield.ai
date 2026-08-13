@@ -30,11 +30,11 @@ class PlaceholderScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 72,
-                height: 72,
+                width: 64,
+                height: 64,
                 decoration: BoxDecoration(
-                  color: AppColors.leaf.withValues(alpha: 0.25),
-                  shape: BoxShape.circle,
+                  color: AppColors.moss.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: const Icon(
                   Icons.construction_rounded,

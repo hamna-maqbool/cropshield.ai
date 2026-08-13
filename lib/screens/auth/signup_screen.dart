@@ -1,3 +1,5 @@
+import 'package:crop_shield_ai/theme/app_colors.dart';
+import 'package:crop_shield_ai/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import '../../services/auth_service.dart';
 
@@ -55,7 +57,7 @@ class _SignupScreenState extends State<SignupScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Icon(Icons.eco_rounded, size: 56, color: Colors.green),
+                const Icon(Icons.eco_rounded, size: 52, color: AppColors.moss),
                 const SizedBox(height: 12),
                 Text(
                   'Create your account',
@@ -67,7 +69,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: _nameController,
                   decoration: const InputDecoration(
                     labelText: 'Full name',
-                    border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.person_outline),
                   ),
                   validator: (v) =>
@@ -79,7 +80,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: 'Email',
-                    border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.email_outlined),
                   ),
                   validator: (v) => (v == null || !v.contains('@'))
@@ -92,7 +92,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   obscureText: _obscurePassword,
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    border: const OutlineInputBorder(),
                     prefixIcon: const Icon(Icons.lock_outline),
                     suffixIcon: IconButton(
                       icon: Icon(_obscurePassword
@@ -107,18 +106,10 @@ class _SignupScreenState extends State<SignupScreen> {
                       : null,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
+                PrimaryButton(
+                  label: 'Sign Up',
+                  isLoading: _isLoading,
                   onPressed: _isLoading ? null : _signup,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                  ),
-                  child: _isLoading
-                      ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Text('Sign Up'),
                 ),
                 const SizedBox(height: 12),
                 TextButton(

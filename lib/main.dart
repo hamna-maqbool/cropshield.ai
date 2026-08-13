@@ -1,4 +1,3 @@
-import 'package:crop_shield_ai/screens/home/home_screen.dart';
 import 'package:crop_shield_ai/router/app_router.dart';
 import 'package:crop_shield_ai/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';

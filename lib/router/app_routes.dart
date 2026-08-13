@@ -1,5 +1,8 @@
 class AppRoutes {
   static const home = '/';
+  static const tools = '/tools';
+  static const community = '/community';
+  static const play = '/play';
   static const camera = '/camera';
   static const imageUpload = '/image-upload';
   static const textInput = '/text-input';

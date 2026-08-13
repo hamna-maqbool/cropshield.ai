@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../models/forum_post.dart';
-import '../services/forum_service.dart';
-import '../widgets/post_card.dart';
-import 'auth/login_screen.dart';
-import 'create_post_screen.dart';
-import 'post_detail_screen.dart';
+import '../../models/forum_post.dart';
+import '../../services/forum_service.dart';
+import '../../widgets/post_card.dart';
+import '../auth/login_screen.dart';
+import '../create_post_screen.dart';
+import '../post_detail_screen.dart';
 
 class ForumScreen extends StatefulWidget {
   const ForumScreen({super.key});
@@ -105,9 +105,8 @@ class _ForumScreenState extends State<ForumScreen> {
         label: const Text('Ask a Question'),
         onPressed: () async {
           final loggedIn = await _ensureLoggedIn();
-          if (!loggedIn || !mounted) return;
-          Navigator.push(...)
-            context,
+          if (!loggedIn || !context.mounted) return;
+          await Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const CreatePostScreen()),
           );
         },

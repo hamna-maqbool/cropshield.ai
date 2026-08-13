@@ -127,7 +127,7 @@ class _RunnerGameScreenState extends State<RunnerGameScreen> {
           icon: Icon(
             _game.state == RunnerGameState.playing
                 ? Icons.pause_circle_filled_rounded
-                : Icons.arrow_back_ios_new_rounded,
+                : Icons.arrow_back_rounded,
             color: Colors.white,
           ),
         ),
@@ -151,7 +151,11 @@ class _ReadyOverlay extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('🏃‍♂️', style: TextStyle(fontSize: 64)),
+              const Icon(
+                Icons.directions_run_rounded,
+                size: 56,
+                color: AppColors.leaf,
+              ),
               const SizedBox(height: 12),
               const Text(
                 'Field Runner',
@@ -268,8 +272,11 @@ class _GameOverOverlay extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(isNewBest ? '🏆' : '🐛',
-                  style: const TextStyle(fontSize: 56)),
+              Icon(
+                isNewBest ? Icons.emoji_events_rounded : Icons.bug_report_rounded,
+                size: 48,
+                color: isNewBest ? AppColors.straw : AppColors.leaf,
+              ),
               const SizedBox(height: 10),
               Text(
                 isNewBest ? 'New Best Score!' : 'Game Over',

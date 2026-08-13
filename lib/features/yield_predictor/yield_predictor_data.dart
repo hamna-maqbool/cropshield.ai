@@ -11,7 +11,7 @@
 /// Prices and per-acre costs are seeded with reasonable, editable defaults —
 /// these move weekly/seasonally, so the UI always lets the farmer override
 /// them with the current mandi rate before calculating. 1 maund = 40 kg.
-library yield_predictor_data;
+library;
 
 enum CropType { cotton, riceBasmati, riceCoarse }
 

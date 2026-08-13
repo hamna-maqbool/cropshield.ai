@@ -1,3 +1,4 @@
+import 'package:crop_shield_ai/theme/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../models/forum_post.dart';
@@ -28,8 +29,7 @@ class _ForumScreenState extends State<ForumScreen> {
 
   Future<bool> _ensureLoggedIn() async {
     if (FirebaseAuth.instance.currentUser != null) return true;
-    final result = await Navigator.push(
-      context,
+    final result = await Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(builder: (_) => const LoginScreen()),
     );
     return result == true && FirebaseAuth.instance.currentUser != null;
@@ -39,21 +39,27 @@ class _ForumScreenState extends State<ForumScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Community Forum'),
+        title: const Text('Community'),
+        automaticallyImplyLeading: false,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48),
+          preferredSize: const Size.fromHeight(52),
           child: SizedBox(
-            height: 48,
+            height: 52,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
               children: _cropOptions.map((crop) {
                 final selected = crop == _selectedCrop;
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  padding: const EdgeInsets.only(right: 8),
                   child: ChoiceChip(
                     label: Text(crop),
                     selected: selected,
+                    selectedColor: AppColors.moss,
+                    labelStyle: TextStyle(
+                      color: selected ? Colors.white : AppColors.textSecondary,
+                      fontWeight: FontWeight.w600,
+                    ),
                     onSelected: (_) => setState(() => _selectedCrop = crop),
                   ),
                 );
@@ -73,8 +79,28 @@ class _ForumScreenState extends State<ForumScreen> {
           }
           final posts = snapshot.data!;
           if (posts.isEmpty) {
-            return const Center(
-              child: Text('No questions yet. Be the first to ask!'),
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.forum_outlined,
+                      size: 40,
+                      color: AppColors.moss.withValues(alpha: 0.5),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'No questions yet. Be the first to ask!',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: AppColors.textMuted,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
             );
           }
           return ListView.builder(
@@ -85,8 +111,7 @@ class _ForumScreenState extends State<ForumScreen> {
               return PostCard(
                 post: post,
                 onTap: () {
-                  Navigator.push(
-                    context,
+                  Navigator.of(context, rootNavigator: true).push(
                     MaterialPageRoute(
                       builder: (_) => PostDetailScreen(post: post),
                     ),
@@ -102,9 +127,8 @@ class _ForumScreenState extends State<ForumScreen> {
         label: const Text('Ask a Question'),
         onPressed: () async {
           final loggedIn = await _ensureLoggedIn();
-          if (!loggedIn || !mounted) return;
-          Navigator.push(
-            context,
+          if (!loggedIn || !context.mounted) return;
+          Navigator.of(context, rootNavigator: true).push(
             MaterialPageRoute(builder: (_) => const CreatePostScreen()),
           );
         },

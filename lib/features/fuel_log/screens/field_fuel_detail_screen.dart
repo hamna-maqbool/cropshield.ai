@@ -4,6 +4,7 @@
 // a summary header. Long-press (or swipe, if you add it) to delete a
 // wrong entry — kept simple as a confirm dialog for now.
 
+import 'package:crop_shield_ai/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../models/fuel_entry.dart';
@@ -100,7 +101,7 @@ class _FieldFuelDetailScreenState extends State<FieldFuelDetailScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                  color: AppColors.moss.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(

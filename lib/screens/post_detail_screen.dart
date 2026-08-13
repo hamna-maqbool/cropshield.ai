@@ -1,3 +1,4 @@
+import 'package:crop_shield_ai/theme/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../models/comment.dart';
@@ -20,8 +21,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
 
   Future<bool> _ensureLoggedIn() async {
     if (FirebaseAuth.instance.currentUser != null) return true;
-    final result = await Navigator.push(
-      context,
+    final result = await Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(builder: (_) => const LoginScreen()),
     );
     return result == true && FirebaseAuth.instance.currentUser != null;
@@ -62,7 +62,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             IconButton(
               icon: Icon(
                 post.isResolved ? Icons.check_circle : Icons.check_circle_outline,
-                color: post.isResolved ? Colors.green : null,
+                color: post.isResolved ? AppColors.success : null,
               ),
               tooltip: 'Mark as resolved',
               onPressed: () =>
@@ -93,8 +93,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 ),
                 const SizedBox(height: 12),
                 Text(post.title,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
+                    style: Theme.of(context).textTheme.headlineSmall),
                 const SizedBox(height: 8),
                 Text(post.description),
                 if (post.imageUrl != null) ...[
@@ -142,7 +141,6 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                       controller: _commentController,
                       decoration: const InputDecoration(
                         hintText: 'Write a reply...',
-                        border: OutlineInputBorder(),
                         isDense: true,
                         contentPadding:
                             EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -180,11 +178,13 @@ class _CommentTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: comment.isExpert ? const Color(0xFFEAF6EC) : Colors.grey[100],
-        borderRadius: BorderRadius.circular(8),
+        color: comment.isExpert
+            ? AppColors.success.withValues(alpha: 0.08)
+            : AppColors.parchment.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(12),
         border: comment.isExpert
-            ? Border.all(color: Colors.green.shade300)
-            : null,
+            ? Border.all(color: AppColors.success.withValues(alpha: 0.35))
+            : Border.all(color: AppColors.parchment),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +199,7 @@ class _CommentTile extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: AppColors.success,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: const Text(

@@ -309,9 +309,6 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
           _statusBar(),
           const SizedBox(height: 20),
           Card(
-            elevation: 2,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
             child: Padding(
               padding: const EdgeInsets.all(18),
               child: Column(

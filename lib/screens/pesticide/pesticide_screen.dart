@@ -236,62 +236,47 @@ class _PesticideScreenState extends State<PesticideScreen> {
     final calc = _calculation;
 
     return Scaffold(
-      backgroundColor: AppColors.cream,
       appBar: AppBar(
-        backgroundColor: AppColors.cream,
-        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded,
-              color: AppColors.textPrimary),
+          icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () => context.pop(),
         ),
-        title: const Text(
-          'Pesticide Calculator',
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: const Text('Pesticide Calculator'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [AppColors.forest, AppColors.moss],
-                ),
-                borderRadius: BorderRadius.circular(20),
+                color: AppColors.forest,
+                borderRadius: BorderRadius.circular(16),
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '🧪 کیڑے مار دوا کیلکولیٹر',
+                  Text(
+                    'کیڑے مار دوا کیلکولیٹر',
                     style: TextStyle(
                       color: AppColors.leaf,
-                      fontSize: 14,
+                      fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  const Text(
+                  SizedBox(height: 6),
+                  Text(
                     'Pesticide Calculator',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  const Text(
+                  SizedBox(height: 6),
+                  Text(
                     'Get the exact pesticide dose, tank-mix, and safe harvest date for your field size.',
                     style: TextStyle(color: Colors.white70, fontSize: 13),
                   ),
@@ -326,8 +311,15 @@ class _PesticideScreenState extends State<PesticideScreen> {
                       ),
                       child: Column(
                         children: [
-                          Text(crop == 'Cotton' ? '🌿' : '🌾',
-                              style: const TextStyle(fontSize: 28)),
+                          Icon(
+                            crop == 'Cotton'
+                                ? Icons.eco_rounded
+                                : Icons.grass_rounded,
+                            color: isSelected
+                                ? Colors.white
+                                : AppColors.moss,
+                            size: 26,
+                          ),
                           const SizedBox(height: 6),
                           Text(
                             crop,
@@ -403,15 +395,8 @@ class _PesticideScreenState extends State<PesticideScreen> {
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),
                       onChanged: (_) => setState(() {}),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'e.g. 5',
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide:
-                              const BorderSide(color: AppColors.parchment),
-                        ),
                       ),
                     ),
                   ),
@@ -419,15 +404,7 @@ class _PesticideScreenState extends State<PesticideScreen> {
                   Expanded(
                     child: DropdownButtonFormField<String>(
                       initialValue: _areaUnit,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide:
-                              const BorderSide(color: AppColors.parchment),
-                        ),
-                      ),
+                      decoration: const InputDecoration(),
                       items: const [
                         DropdownMenuItem(
                             value: 'Acres', child: Text('Acres')),
@@ -457,14 +434,8 @@ class _PesticideScreenState extends State<PesticideScreen> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 onChanged: (_) => setState(() {}),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Standard knapsack sprayer = 16 L',
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: AppColors.parchment),
-                  ),
                 ),
               ),
 
@@ -524,7 +495,8 @@ class _PesticideScreenState extends State<PesticideScreen> {
                 child: Center(
                   child: Column(
                     children: [
-                      const Text('🧪', style: TextStyle(fontSize: 48)),
+                      Icon(Icons.science_rounded,
+                          size: 40, color: AppColors.moss.withValues(alpha: 0.5)),
                       const SizedBox(height: 12),
                       const Text(
                         'Select crop and pest to calculate exact pesticide quantity for your field',
@@ -575,9 +547,8 @@ class _RecommendationCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.parchment, width: 1.5),
+        border: Border.all(color: AppColors.parchment),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -585,7 +556,7 @@ class _RecommendationCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.moss.withOpacity(0.08),
+              color: AppColors.moss.withValues(alpha:0.08),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16),
                 topRight: Radius.circular(16),
@@ -596,7 +567,7 @@ class _RecommendationCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppColors.moss.withOpacity(0.15),
+                    color: AppColors.moss.withValues(alpha:0.15),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Icon(Icons.science_rounded,
@@ -653,10 +624,10 @@ class _RecommendationCard extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.success.withOpacity(0.06),
+                    color: AppColors.success.withValues(alpha:0.06),
                     borderRadius: BorderRadius.circular(10),
                     border:
-                        Border.all(color: AppColors.success.withOpacity(0.2)),
+                        Border.all(color: AppColors.success.withValues(alpha:0.2)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -732,12 +703,8 @@ class _ResultCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [AppColors.forest, AppColors.moss],
-        ),
-        borderRadius: BorderRadius.circular(20),
+        color: AppColors.forest,
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

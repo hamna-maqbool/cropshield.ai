@@ -271,22 +271,12 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cream,
       appBar: AppBar(
-        backgroundColor: AppColors.cream,
-        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded,
-              color: AppColors.textPrimary),
+          icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () => context.pop(),
         ),
-        title: const Text(
-          'Fertilizer Guide',
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: const Text('Fertilizer Guide'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -295,23 +285,19 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
           children: [
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [AppColors.forest, AppColors.moss],
-                ),
-                borderRadius: BorderRadius.circular(20),
+                color: AppColors.forest,
+                borderRadius: BorderRadius.circular(16),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    '🌱 کھاد گائیڈ',
+                    'کھاد گائیڈ',
                     style: TextStyle(
                       color: AppColors.leaf,
-                      fontSize: 14,
+                      fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -320,8 +306,8 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                     'Fertilizer & Nutrition Guide',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -377,9 +363,14 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                       ),
                       child: Column(
                         children: [
-                          Text(
-                            crop == 'Cotton' ? '🌿' : '🌾',
-                            style: const TextStyle(fontSize: 28),
+                          Icon(
+                            crop == 'Cotton'
+                                ? Icons.eco_rounded
+                                : Icons.grass_rounded,
+                            color: isSelected
+                                ? Colors.white
+                                : AppColors.moss,
+                            size: 26,
                           ),
                           const SizedBox(height: 6),
                           Text(
@@ -400,7 +391,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                                   horizontal: 8, vertical: 2),
                               decoration: BoxDecoration(
                                 color:
-                                    Colors.white.withOpacity(0.2),
+                                    Colors.white.withValues(alpha:0.2),
                                 borderRadius:
                                     BorderRadius.circular(10),
                               ),
@@ -438,7 +429,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
               physics: const NeverScrollableScrollPhysics(),
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 2.5,
+              childAspectRatio: 2.4,
               children: _stages.map((stage) {
                 final isSelected = _selectedStage == stage;
                 final isEnabled = _selectedCrop != null;
@@ -503,8 +494,8 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                   padding: const EdgeInsets.all(32),
                   child: Column(
                     children: [
-                      const Text('🌱',
-                          style: TextStyle(fontSize: 48)),
+                      Icon(Icons.grass_rounded,
+                          size: 40, color: AppColors.moss.withValues(alpha: 0.5)),
                       const SizedBox(height: 12),
                       const Text(
                         'Select your crop and growth stage to see fertilizer recommendations with Pakistani brand names',
@@ -535,9 +526,8 @@ class _FertilizerCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.parchment, width: 1.5),
+        border: Border.all(color: AppColors.parchment),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -546,7 +536,7 @@ class _FertilizerCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.moss.withOpacity(0.08),
+              color: AppColors.moss.withValues(alpha:0.08),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16),
                 topRight: Radius.circular(16),
@@ -557,7 +547,7 @@ class _FertilizerCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppColors.moss.withOpacity(0.15),
+                    color: AppColors.moss.withValues(alpha:0.15),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Icon(
@@ -641,10 +631,10 @@ class _FertilizerCard extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.danger.withOpacity(0.06),
+                    color: AppColors.danger.withValues(alpha:0.06),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                        color: AppColors.danger.withOpacity(0.2)),
+                        color: AppColors.danger.withValues(alpha:0.2)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

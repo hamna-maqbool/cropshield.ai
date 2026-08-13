@@ -12,11 +12,10 @@ import 'falling_item_component.dart';
 class PestObstacleComponent extends FallingItemComponent {
   PestObstacleComponent({
     required super.lane,
-    required double laneX,
+    required super.laneX,
     required this.pestType,
     String? emojiOverride,
   }) : super(
-          laneX: laneX,
           emoji: emojiOverride ?? (pestType == PestType.ground ? '🐛' : '🦅'),
           fillColor: AppColors.clay,
         );
@@ -27,10 +26,9 @@ class PestObstacleComponent extends FallingItemComponent {
 class LeafCollectibleComponent extends FallingItemComponent {
   LeafCollectibleComponent({
     required super.lane,
-    required double laneX,
+    required super.laneX,
     this.isGolden = false,
   }) : super(
-          laneX: laneX,
           emoji: isGolden ? '🍀' : '🌿',
           fillColor: isGolden ? AppColors.parchment : AppColors.leaf,
           radius: isGolden ? 22 : 20,
@@ -42,10 +40,9 @@ class LeafCollectibleComponent extends FallingItemComponent {
 class PowerUpComponent extends FallingItemComponent {
   PowerUpComponent({
     required super.lane,
-    required double laneX,
+    required super.laneX,
     required this.powerUpType,
   }) : super(
-          laneX: laneX,
           emoji: powerUpType == PowerUpType.shield ? '🛡️' : '🧪',
           fillColor: powerUpType == PowerUpType.shield
               ? AppColors.stone

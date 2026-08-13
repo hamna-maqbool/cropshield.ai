@@ -105,7 +105,6 @@ class _AddCreditEntryScreenState extends State<AddCreditEntryScreen> {
               initialValue: _category,
               decoration: const InputDecoration(
                 labelText: 'Category',
-                border: OutlineInputBorder(),
               ),
               items: CreditCategory.values
                   .map((c) =>
@@ -118,7 +117,6 @@ class _AddCreditEntryScreenState extends State<AddCreditEntryScreen> {
               controller: _itemController,
               decoration: const InputDecoration(
                 labelText: 'Item name (e.g. Urea, DAP, Cypermethrin)',
-                border: OutlineInputBorder(),
               ),
               validator: (v) =>
                   (v == null || v.trim().isEmpty) ? 'Enter item name' : null,
@@ -133,7 +131,6 @@ class _AddCreditEntryScreenState extends State<AddCreditEntryScreen> {
                         const TextInputType.numberWithOptions(decimal: true),
                     decoration: const InputDecoration(
                       labelText: 'Quantity',
-                      border: OutlineInputBorder(),
                     ),
                     validator: (v) {
                       final n = double.tryParse(v ?? '');
@@ -148,7 +145,6 @@ class _AddCreditEntryScreenState extends State<AddCreditEntryScreen> {
                     controller: _unitController,
                     decoration: const InputDecoration(
                       labelText: 'Unit (kg, bags...)',
-                      border: OutlineInputBorder(),
                     ),
                     validator: (v) =>
                         (v == null || v.trim().isEmpty) ? 'Required' : null,
@@ -163,7 +159,6 @@ class _AddCreditEntryScreenState extends State<AddCreditEntryScreen> {
               decoration: const InputDecoration(
                 labelText: 'Total amount owed for this purchase',
                 prefixIcon: Icon(Icons.attach_money_rounded),
-                border: OutlineInputBorder(),
               ),
               validator: (v) {
                 final n = double.tryParse(v ?? '');
@@ -177,7 +172,6 @@ class _AddCreditEntryScreenState extends State<AddCreditEntryScreen> {
               decoration: const InputDecoration(
                 labelText: 'Field this was used for (optional)',
                 prefixIcon: Icon(Icons.grass_rounded),
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 14),
@@ -216,7 +210,6 @@ class _AddCreditEntryScreenState extends State<AddCreditEntryScreen> {
               maxLines: 2,
               decoration: const InputDecoration(
                 labelText: 'Note (optional)',
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 24),
