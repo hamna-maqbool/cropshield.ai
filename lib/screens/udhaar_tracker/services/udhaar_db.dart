@@ -2,8 +2,8 @@
 //
 // Local SQLite storage for dealers, credit purchases, and repayments.
 // Three tables, linked by dealerId. Outstanding balance is always
-// computed at read time from credit_entries minus repayments — never
-// stored — so it can't drift out of sync if an entry is edited or
+// computed at read time from credit_entries minus repayments : never
+// stored : so it can't drift out of sync if an entry is edited or
 // deleted later.
 
 import 'package:path/path.dart';
@@ -29,7 +29,7 @@ class UdhaarDb {
     return openDatabase(
       path,
       version: 1,
-      // sqflite does not enforce foreign keys by default — without this,
+      // sqflite does not enforce foreign keys by default : without this,
       // ON DELETE CASCADE above is silently ignored and deleting a
       // dealer would leave orphaned credit_entries/repayments behind.
       onConfigure: (db) async {
@@ -156,7 +156,7 @@ class UdhaarDb {
   // Summaries / ledger
   // ---------------------------------------------------------------------
 
-  /// One summary per dealer — this powers the main screen's dealer list.
+  /// One summary per dealer : this powers the main screen's dealer list.
   Future<List<DealerSummary>> getAllDealerSummaries() async {
     final dealers = await getAllDealers();
     final summaries = <DealerSummary>[];
@@ -191,7 +191,7 @@ class UdhaarDb {
   }
 
   /// Combined, chronological purchase + repayment history for one
-  /// dealer — a bank-statement-style ledger with a running balance.
+  /// dealer : a bank-statement-style ledger with a running balance.
   Future<List<LedgerRow>> getLedgerForDealer(int dealerId) async {
     final entries = await getEntriesForDealer(dealerId);
     final repayments = await getRepaymentsForDealer(dealerId);

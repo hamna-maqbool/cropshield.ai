@@ -2,7 +2,7 @@
 //
 // Concrete falling items: pests (obstacles), leaves (collectibles), and
 // power-ups. Each only needs to define appearance + which category it
-// belongs to — the shared fall/cleanup/render logic lives in
+// belongs to : the shared fall/cleanup/render logic lives in
 // FallingItemComponent.
 
 import 'package:crop_shield_ai/theme/app_colors.dart';

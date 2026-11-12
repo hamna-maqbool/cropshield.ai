@@ -4,7 +4,7 @@
 // they're easy to reference (and easy to explain in a defense) without
 // hunting through component files.
 
-/// Obstacles come in two flavors, each dodged a different way — this is
+/// Obstacles come in two flavors, each dodged a different way : this is
 /// what gives jump/duck a real purpose instead of being decorative.
 enum PestType {
   /// Sits on the ground in its lane. Dodge by switching lanes OR jumping.
@@ -15,7 +15,7 @@ enum PestType {
 }
 
 enum PowerUpType {
-  /// Temporary invincibility — one free hit is absorbed, obstacle is
+  /// Temporary invincibility : one free hit is absorbed, obstacle is
   /// destroyed instead of ending the run. Themed as a pesticide shield.
   shield,
 

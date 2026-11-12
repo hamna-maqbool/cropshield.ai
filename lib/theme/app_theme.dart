@@ -63,6 +63,8 @@ abstract final class AppTheme {
         centerTitle: false,
         backgroundColor: AppColors.cream,
         foregroundColor: AppColors.textPrimary,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         titleTextStyle: GoogleFonts.dmSans(
           fontSize: 18,
@@ -72,11 +74,13 @@ abstract final class AppTheme {
       ),
       cardTheme: CardThemeData(
         elevation: 0,
+        shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
         color: Colors.white,
         margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.lg),
-          side: const BorderSide(color: AppColors.parchment, width: 1),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+          side: BorderSide(color: AppColors.parchment, width: 1),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -117,7 +121,7 @@ abstract final class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           minimumSize: const Size(0, 48),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(AppRadius.sm),
           ),
           textStyle: GoogleFonts.dmSans(
             fontWeight: FontWeight.w600,
@@ -130,10 +134,11 @@ abstract final class AppTheme {
           backgroundColor: AppColors.moss,
           foregroundColor: Colors.white,
           elevation: 0,
+          shadowColor: Colors.transparent,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           minimumSize: const Size(0, 48),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(AppRadius.sm),
           ),
           textStyle: GoogleFonts.dmSans(
             fontWeight: FontWeight.w600,
@@ -157,6 +162,10 @@ abstract final class AppTheme {
         focusElevation: 0,
         hoverElevation: 0,
         highlightElevation: 0,
+        disabledElevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.sm)),
+        ),
         extendedPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       ),
       chipTheme: ChipThemeData(
@@ -175,7 +184,7 @@ abstract final class AppTheme {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppRadius.sm),
           side: const BorderSide(color: AppColors.parchment),
         ),
         side: const BorderSide(color: AppColors.parchment),
@@ -190,6 +199,7 @@ abstract final class AppTheme {
         backgroundColor: AppColors.forest,
         contentTextStyle: GoogleFonts.dmSans(color: Colors.white),
         behavior: SnackBarBehavior.floating,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.sm),
         ),

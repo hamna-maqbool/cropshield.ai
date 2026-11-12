@@ -1,15 +1,15 @@
 // runner_game_screen.dart
 //
-// "Field Runner" — Flame-powered 3-lane endless runner. The farmer
+// "Field Runner" : Flame-powered 3-lane endless runner. The farmer
 // auto-runs down crop rows; swipe left/right to switch lanes, swipe up
 // to jump ground pests, swipe down to duck flying pests. Collect leaves
 // for score, grab power-ups (shield / growth boost) for an edge.
 //
-// This file is intentionally "dumb" — all game state and rules live in
+// This file is intentionally "dumb" : all game state and rules live in
 // FieldRunnerGame. This widget just hosts the GameWidget, translates
 // swipes into calls on the game, and renders the three overlay screens
 // (ready / paused / game over) as ordinary Flutter widgets driven by
-// plain setState — no extra state-management machinery needed.
+// plain setState : no extra state-management machinery needed.
 
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';

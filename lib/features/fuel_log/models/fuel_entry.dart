@@ -2,7 +2,7 @@
 //
 // A single diesel fill-up record. One tractor + one field + one fill-up
 // event. History and cost rollups are computed FROM a list of these,
-// not stored separately — keeps the source of truth in one place.
+// not stored separately : keeps the source of truth in one place.
 
 class FuelEntry {
   FuelEntry({
@@ -89,7 +89,7 @@ class FuelEntry {
 }
 
 /// Rolled-up totals for one field across all its fuel entries.
-/// Computed on the fly by FuelLogDb.getFieldSummaries() — not stored.
+/// Computed on the fly by FuelLogDb.getFieldSummaries() : not stored.
 class FieldFuelSummary {
   FieldFuelSummary({
     required this.fieldName,

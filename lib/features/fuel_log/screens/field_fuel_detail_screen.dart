@@ -2,7 +2,7 @@
 //
 // Full fill-up history for one field: every entry, newest first, with
 // a summary header. Long-press (or swipe, if you add it) to delete a
-// wrong entry — kept simple as a confirm dialog for now.
+// wrong entry : kept simple as a confirm dialog for now.
 
 import 'package:crop_shield_ai/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -175,11 +175,11 @@ class _EntryTile extends StatelessWidget {
       child: ListTile(
         leading: const Icon(Icons.local_gas_station_rounded),
         title: Text(
-            '${entry.liters.toStringAsFixed(1)} L · ${entry.tractorName}'),
+            '${entry.liters.toStringAsFixed(1)} L, ${entry.tractorName}'),
         subtitle: Text(
-          '$dateStr · ${entry.pricePerLiter.toStringAsFixed(1)}/L'
-          '${entry.workerName != null ? ' · by ${entry.workerName}' : ''}'
-          '${entry.stationName != null ? ' · ${entry.stationName}' : ''}',
+          '$dateStr, ${entry.pricePerLiter.toStringAsFixed(1)}/L'
+          '${entry.workerName != null ? ', by ${entry.workerName}' : ''}'
+          '${entry.stationName != null ? ', ${entry.stationName}' : ''}',
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,

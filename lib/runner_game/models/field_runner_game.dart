@@ -24,7 +24,7 @@ import '../runner_service.dart';
 class FieldRunnerGame extends FlameGame with HasCollisionDetection {
   FieldRunnerGame({required this.onGameOver});
 
-  /// Fired once per run when the player is finally out — the Flutter
+  /// Fired once per run when the player is finally out : the Flutter
   /// screen uses this to flip its overlay and show the game-over card.
   final void Function(int score, bool isNewBest) onGameOver;
 
@@ -234,7 +234,7 @@ class FieldRunnerGame extends FlameGame with HasCollisionDetection {
   }
 
   // ---------------------------------------------------------------------
-  // Collision resolution — called by falling items when they reach the
+  // Collision resolution : called by falling items when they reach the
   // player's row and share a lane with them (see FallingItemComponent /
   // PlayerComponent hitboxes).
   // ---------------------------------------------------------------------
@@ -316,7 +316,7 @@ class FieldRunnerGame extends FlameGame with HasCollisionDetection {
   void _updateShake(double dt) {
     if (_shakeTime > 0) {
       _shakeTime -= dt;
-      // NOTE: num.clamp() returns num, not double — always follow it
+      // NOTE: num.clamp() returns num, not double : always follow it
       // with .toDouble() when the result feeds a double-typed field.
       // This is the exact bug class that broke the previous attempt.
       final falloff = (_shakeTime / 0.35).clamp(0.0, 1.0).toDouble();

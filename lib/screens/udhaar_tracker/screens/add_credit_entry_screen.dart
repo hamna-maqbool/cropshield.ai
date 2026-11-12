@@ -95,7 +95,7 @@ class _AddCreditEntryScreenState extends State<AddCreditEntryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Log Purchase — ${widget.dealer.name}')),
+      appBar: AppBar(title: Text('Log Purchase : ${widget.dealer.name}')),
       body: Form(
         key: _formKey,
         child: ListView(

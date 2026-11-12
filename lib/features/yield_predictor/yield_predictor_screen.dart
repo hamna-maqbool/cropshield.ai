@@ -7,12 +7,12 @@ import 'yield_predictor_data.dart';
 import 'yield_predictor_engine.dart';
 import 'yield_result_screen.dart';
 
-/// Yield & Profit Predictor — input form.
+/// Yield & Profit Predictor : input form.
 ///
 /// Designed for real farmer use: almost everything is tap-to-select
 /// (chips/steppers), not typed. If [lastScanCrop] / [lastScanSeverity] are
 /// provided (from the app's own disease-detection history), the crop and
-/// health fields are pre-filled automatically — the disease model feeds
+/// health fields are pre-filled automatically : the disease model feeds
 /// straight into the yield model.
 class YieldPredictorScreen extends StatefulWidget {
   const YieldPredictorScreen({
@@ -207,8 +207,8 @@ class _YieldPredictorScreenState extends State<YieldPredictorScreen> {
           _SectionCard(
             title: 'Crop Health',
             subtitle: _diseaseAutoDetected
-                ? 'Auto-filled from your latest scan — you can override it'
-                : 'No recent scan found — set manually or scan a leaf first',
+                ? 'Auto-filled from your latest scan. You can override it'
+                : 'No recent scan found. Set manually or scan a leaf first',
             child: _ChipRow<DiseaseSeverity>(
               value: _disease,
               options: DiseaseSeverity.values,
@@ -222,7 +222,7 @@ class _YieldPredictorScreenState extends State<YieldPredictorScreen> {
           const SizedBox(height: 14),
           _SectionCard(
             title: 'Market Price',
-            subtitle: 'Prices move often — check today\'s mandi rate',
+            subtitle: 'Prices move often. Check today\'s mandi rate',
             child: _MoneyField(
               label: 'Price per maund (Rs)',
               value: _price,

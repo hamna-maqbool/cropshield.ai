@@ -1,7 +1,9 @@
 import 'package:crop_shield_ai/theme/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+// Bottom tab shell for Scan, Tools, Community, and Play.
 class AppShell extends StatelessWidget {
   const AppShell({super.key, required this.navigationShell});
 
@@ -31,31 +33,35 @@ class _AppBottomBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
+  // iOS style icons for the navbar.
   static const _items = [
     _NavItem(
       label: 'Scan',
-      icon: Icons.document_scanner_outlined,
-      activeIcon: Icons.document_scanner_rounded,
+      icon: CupertinoIcons.viewfinder,
+      activeIcon: CupertinoIcons.viewfinder,
     ),
     _NavItem(
       label: 'Tools',
-      icon: Icons.grid_view_outlined,
-      activeIcon: Icons.grid_view_rounded,
+      icon: CupertinoIcons.square_grid_2x2,
+      activeIcon: CupertinoIcons.square_grid_2x2_fill,
     ),
     _NavItem(
       label: 'Community',
-      icon: Icons.forum_outlined,
-      activeIcon: Icons.forum_rounded,
+      icon: CupertinoIcons.chat_bubble_2,
+      activeIcon: CupertinoIcons.chat_bubble_2_fill,
     ),
     _NavItem(
       label: 'Play',
-      icon: Icons.sports_esports_outlined,
-      activeIcon: Icons.sports_esports_rounded,
+      icon: CupertinoIcons.gamecontroller,
+      activeIcon: CupertinoIcons.gamecontroller_fill,
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final bottomInset = MediaQuery.paddingOf(context).bottom;
+    final isNarrow = MediaQuery.sizeOf(context).width < 360;
+
     return DecoratedBox(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -63,10 +69,10 @@ class _AppBottomBar extends StatelessWidget {
           top: BorderSide(color: AppColors.parchment),
         ),
       ),
-      child: SafeArea(
-        top: false,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: bottomInset),
         child: SizedBox(
-          height: 56,
+          height: isNarrow ? 52 : 56,
           child: Row(
             children: [
               for (var i = 0; i < _items.length; i++)
@@ -74,6 +80,7 @@ class _AppBottomBar extends StatelessWidget {
                   child: _NavButton(
                     item: _items[i],
                     selected: i == currentIndex,
+                    compact: isNarrow,
                     onTap: () => onTap(i),
                   ),
                 ),
@@ -102,11 +109,13 @@ class _NavButton extends StatelessWidget {
     required this.item,
     required this.selected,
     required this.onTap,
+    required this.compact,
   });
 
   final _NavItem item;
   final bool selected;
   final VoidCallback onTap;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -114,25 +123,28 @@ class _NavButton extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
-      splashColor: AppColors.moss.withValues(alpha: 0.08),
-      highlightColor: AppColors.moss.withValues(alpha: 0.04),
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             selected ? item.activeIcon : item.icon,
-            size: 24,
+            size: compact ? 22 : 24,
             color: color,
           ),
-          const SizedBox(height: 4),
-          AnimatedDefaultTextStyle(
-            duration: const Duration(milliseconds: 180),
-            style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  fontSize: 11,
-                  fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                  color: color,
-                ),
-            child: Text(item.label),
+          SizedBox(height: compact ? 2 : 4),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              item.label,
+              maxLines: 1,
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    fontSize: compact ? 10 : 11,
+                    fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+                    color: color,
+                  ),
+            ),
           ),
         ],
       ),

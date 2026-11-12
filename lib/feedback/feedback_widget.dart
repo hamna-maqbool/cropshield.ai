@@ -1,13 +1,7 @@
-// feedback_widget.dart
-//
-// Farmer-friendly feedback card for the Result screen.
-// - Big thumbs up / thumbs down buttons, no typing required.
-// - If "wrong", the farmer taps the correct disease from a list
-//   instead of typing (most farmers won't type comfortably).
-// - Shows "already submitted" state if they come back to this scan.
+// Simple yes/no feedback after a scan result.
+// If the answer is no, the farmer can tap the correct disease name.
 
 import 'package:crop_shield_ai/theme/app_colors.dart';
-import 'package:crop_shield_ai/theme/app_spacing.dart';
 import 'package:flutter/material.dart';
 import 'feedback_entry.dart';
 import 'feedback_service.dart';
@@ -180,13 +174,12 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(AppRadius.sm),
+      splashColor: Colors.transparent,
+      highlightColor: AppColors.parchment,
       child: Ink(
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.08),
-          borderRadius: BorderRadius.circular(AppRadius.sm),
-          border: Border.all(color: color.withValues(alpha: 0.35)),
+          border: Border.all(color: AppColors.parchment),
         ),
         child: Column(
           children: [

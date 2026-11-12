@@ -46,7 +46,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
           'application': 'Broadcast evenly and mix into soil before sowing',
         },
         {
-          'name': 'Potash (SOP - Sulphate of Potash)',
+          'name': 'Potash (SOP, Sulphate of Potash)',
           'urdu': 'پوٹاش کھاد',
           'brands': 'Engro Zarkhez, Sarsabz SOP, Imported SOP',
           'quantity': '25 kg per acre',
@@ -136,7 +136,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
           'timing': 'Stop all fertilizer 4 weeks before harvest',
           'cost': 'PKR 0',
           'benefit': 'Allows crop to mature naturally for better fiber quality',
-          'deficiency_symptoms': 'N/A — crop is in maturity phase',
+          'deficiency_symptoms': 'Not needed. Crop is in maturity phase',
           'application': 'Focus on timely harvesting when 60% bolls are open',
         },
       ],
@@ -179,8 +179,8 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
       ],
       'Vegetative': [
         {
-          'name': 'Urea — First Dose',
-          'urdu': 'یوریا کھاد — پہلی قسط',
+          'name': 'Urea (First Dose)',
+          'urdu': 'یوریا کھاد (پہلی قسط)',
           'brands': 'Engro Urea, Sona Urea, Fatima Urea, FFC Urea',
           'quantity': '35 kg per acre',
           'timing': 'Apply 2-3 weeks after transplanting',
@@ -190,15 +190,15 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
           'application': 'Drain field to moist condition, broadcast urea, flood after 2 days',
         },
         {
-          'name': 'Urea — Second Dose',
-          'urdu': 'یوریا کھاد — دوسری قسط',
+          'name': 'Urea (Second Dose)',
+          'urdu': 'یوریا کھاد (دوسری قسط)',
           'brands': 'Engro Urea, Sona Urea, Fatima Urea',
           'quantity': '25 kg per acre',
           'timing': 'Apply at maximum tillering stage (35-40 days)',
           'cost': 'PKR 2,000 per acre',
           'benefit': 'Sustains growth and maximizes productive tillers',
           'deficiency_symptoms': 'Early yellowing of flag leaf. Reduced panicle size. Poor grain set at heading stage.',
-          'application': 'Same as first dose — drain, apply, re-flood after 2 days',
+          'application': 'Same as first dose. Drain, apply, then re flood after 2 days',
         },
         {
           'name': 'Potash MOP',
@@ -214,8 +214,8 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
       ],
       'Flowering': [
         {
-          'name': 'Urea — Panicle Dose',
-          'urdu': 'یوریا کھاد — بالی کی قسط',
+          'name': 'Urea (Panicle Dose)',
+          'urdu': 'یوریا کھاد (بالی کی قسط)',
           'brands': 'Engro Urea, Sona Urea, FFC Urea',
           'quantity': '20 kg per acre',
           'timing': 'Apply at panicle initiation (50-55 days)',
@@ -256,7 +256,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
           'timing': 'Stop all fertilizer 3 weeks before harvest',
           'cost': 'PKR 0',
           'benefit': 'Allows grain to mature, dry and fill naturally',
-          'deficiency_symptoms': 'N/A — crop is in maturity phase',
+          'deficiency_symptoms': 'Not needed. Crop is in maturity phase',
           'application': 'Drain field 10-15 days before harvest for easier cutting',
         },
       ],
@@ -285,10 +285,11 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
           children: [
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
-              decoration: BoxDecoration(
-                color: AppColors.forest,
-                borderRadius: BorderRadius.circular(16),
+              padding: const EdgeInsets.only(bottom: 16),
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: AppColors.parchment),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,16 +297,16 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                   const Text(
                     'کھاد گائیڈ',
                     style: TextStyle(
-                      color: AppColors.leaf,
+                      color: AppColors.moss,
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 6),
                   const Text(
-                    'Fertilizer & Nutrition Guide',
+                    'Fertilizer and Nutrition Guide',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.textPrimary,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
@@ -316,7 +317,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                         ? 'Showing recommendations for $_selectedCrop. Select growth stage below.'
                         : 'Select your crop and growth stage for precise fertilizer recommendations with Pakistani brand names.',
                     style: const TextStyle(
-                      color: Colors.white70,
+                      color: AppColors.textMuted,
                       fontSize: 13,
                     ),
                   ),

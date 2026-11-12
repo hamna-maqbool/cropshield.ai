@@ -1,6 +1,8 @@
 import 'package:crop_shield_ai/theme/app_colors.dart';
+import 'package:crop_shield_ai/theme/app_spacing.dart';
 import 'package:flutter/material.dart';
 
+// Main full width button used across forms and result screens.
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
@@ -30,10 +32,12 @@ class PrimaryButton extends StatelessWidget {
           foregroundColor: foregroundColor,
           disabledBackgroundColor: backgroundColor.withValues(alpha: 0.6),
           disabledForegroundColor: foregroundColor.withValues(alpha: 0.8),
+          elevation: 0,
+          shadowColor: Colors.transparent,
           minimumSize: const Size.fromHeight(48),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(AppRadius.sm),
           ),
         ),
         child: isLoading

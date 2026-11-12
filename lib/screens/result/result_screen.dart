@@ -19,7 +19,7 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final confidencePercent = (result.confidence * 100).round();
     final formattedDate =
-        DateFormat('d MMM yyyy · HH:mm').format(result.scannedAt);
+        DateFormat('d MMM yyyy, HH:mm').format(result.scannedAt);
 
     return Scaffold(
       appBar: AppBar(
@@ -42,14 +42,11 @@ class ResultScreen extends StatelessWidget {
               ),
               if (result.imagePath != null) ...[
                 const SizedBox(height: 20),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: AspectRatio(
-                    aspectRatio: 4 / 3,
-                    child: Image.file(
-                      File(result.imagePath!),
-                      fit: BoxFit.cover,
-                    ),
+                AspectRatio(
+                  aspectRatio: 4 / 3,
+                  child: Image.file(
+                    File(result.imagePath!),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ],
@@ -77,10 +74,7 @@ class ResultScreen extends StatelessWidget {
                 value: result.inputMethod.label,
               ),
 
-              // ---------------------------------------------------------
-              // NEW: Feedback loop widget — "Was this diagnosis correct?"
-              // Placed after the metadata, before the action buttons.
-              // ---------------------------------------------------------
+              // Feedback asks if the diagnosis looked correct.
               const SizedBox(height: 12),
               FeedbackWidget(
                 scanId: result.scannedAt.millisecondsSinceEpoch.toString(),
@@ -152,10 +146,11 @@ class _ResultHero extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
-      decoration: BoxDecoration(
-        color: AppColors.forest,
-        borderRadius: BorderRadius.circular(16),
+      padding: const EdgeInsets.only(bottom: 16),
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: AppColors.parchment),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,20 +158,18 @@ class _ResultHero extends StatelessWidget {
           Text(
             'Detected condition',
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: AppColors.leaf,
+                  color: AppColors.moss,
                   fontSize: 11,
                 ),
           ),
           const SizedBox(height: 8),
           Text(
             diseaseName,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 14),
           Wrap(
-            spacing: 8,
+            spacing: 16,
             runSpacing: 8,
             children: [
               _StatChip(
@@ -203,26 +196,19 @@ class _StatChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 14, color: AppColors.leaf),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: Colors.white,
-                  fontSize: 11,
-                ),
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 14, color: AppColors.moss),
+        const SizedBox(width: 6),
+        Text(
+          label,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: AppColors.textSecondary,
+                fontSize: 12,
+              ),
+        ),
+      ],
     );
   }
 }

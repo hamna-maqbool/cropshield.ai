@@ -4,7 +4,7 @@
 //
 // A Dealer has many CreditEntry (purchases made on credit) and many
 // Repayment (money paid back). The outstanding balance owed to a
-// dealer is never stored directly — it is always computed as
+// dealer is never stored directly : it is always computed as
 // (sum of CreditEntry.totalAmount) - (sum of Repayment.amount) so the
 // number can never drift out of sync with the underlying transactions.
 
@@ -146,7 +146,7 @@ class Repayment {
       );
 }
 
-/// Computed rollup for one dealer — never stored, always derived from
+/// Computed rollup for one dealer : never stored, always derived from
 /// the dealer's credit entries and repayments.
 class DealerSummary {
   DealerSummary({
@@ -166,7 +166,7 @@ class DealerSummary {
   double get outstandingBalance => totalCredit - totalRepaid;
 }
 
-/// One row in a dealer's combined ledger — either a purchase or a
+/// One row in a dealer's combined ledger : either a purchase or a
 /// repayment, normalized so the UI can render both in one timeline
 /// with a running balance.
 class LedgerRow {
@@ -176,7 +176,7 @@ class LedgerRow {
         amount = e.totalAmount,
         title = e.itemName,
         subtitle =
-            '${e.quantity} ${e.unit} · ${e.category.label}${e.fieldName != null ? ' · ${e.fieldName}' : ''}',
+            '${e.quantity} ${e.unit}, ${e.category.label}${e.fieldName != null ? ', ${e.fieldName}' : ''}',
         note = e.note,
         sourceId = e.id;
 

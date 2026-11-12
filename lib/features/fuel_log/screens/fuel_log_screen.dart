@@ -118,38 +118,39 @@ class _OverallSummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppColors.forest,
-        borderRadius: BorderRadius.circular(16),
+      padding: const EdgeInsets.only(bottom: 16),
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: AppColors.parchment),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('Total fuel spend',
-              style: TextStyle(color: Colors.white70, fontSize: 13)),
+              style: TextStyle(color: AppColors.textMuted, fontSize: 13)),
           const SizedBox(height: 6),
           Text(
             'Rs ${totalCost.toStringAsFixed(0)}',
             style: const TextStyle(
-                color: Colors.white,
+                color: AppColors.textPrimary,
                 fontSize: 30,
                 fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
           Row(
             children: [
-              Icon(Icons.local_gas_station_rounded,
-                  color: Colors.white70, size: 16),
+              const Icon(Icons.local_gas_station_rounded,
+                  color: AppColors.stone, size: 16),
               const SizedBox(width: 6),
               Text('${totalLiters.toStringAsFixed(1)} L total',
-                  style: const TextStyle(color: Colors.white70)),
+                  style: const TextStyle(color: AppColors.textMuted)),
               const SizedBox(width: 16),
               const Icon(Icons.grass_rounded,
-                  color: Colors.white70, size: 16),
+                  color: AppColors.stone, size: 16),
               const SizedBox(width: 6),
               Text('$fieldCount field${fieldCount == 1 ? '' : 's'}',
-                  style: const TextStyle(color: Colors.white70)),
+                  style: const TextStyle(color: AppColors.textMuted)),
             ],
           ),
         ],
@@ -166,29 +167,22 @@ class _FieldSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: Theme.of(context).dividerColor),
-      ),
+    return Material(
+      color: Colors.white,
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
         onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+        splashColor: Colors.transparent,
+        highlightColor: AppColors.parchment,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: AppColors.parchment),
+            ),
+          ),
           child: Row(
             children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: AppColors.moss.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Icon(Icons.grass_rounded, color: AppColors.moss),
-              ),
+              const Icon(Icons.grass_rounded, color: AppColors.moss, size: 22),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
@@ -199,8 +193,8 @@ class _FieldSummaryCard extends StatelessWidget {
                             fontWeight: FontWeight.w700, fontSize: 15)),
                     const SizedBox(height: 4),
                     Text(
-                      '${summary.totalLiters.toStringAsFixed(1)} L · '
-                      '${summary.entryCount} fill-up${summary.entryCount == 1 ? '' : 's'} · '
+                      '${summary.totalLiters.toStringAsFixed(1)} L, '
+                      '${summary.entryCount} fill up${summary.entryCount == 1 ? '' : 's'}, '
                       'avg ${summary.averagePricePerLiter.toStringAsFixed(1)}/L',
                       style: TextStyle(
                           fontSize: 12,
@@ -217,7 +211,7 @@ class _FieldSummaryCard extends StatelessWidget {
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  const Icon(Icons.chevron_right_rounded, size: 18),
+                  const Icon(Icons.chevron_right, size: 18),
                 ],
               ),
             ],

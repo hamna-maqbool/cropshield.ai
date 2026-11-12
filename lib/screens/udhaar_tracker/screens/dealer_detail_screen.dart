@@ -1,7 +1,7 @@
 // dealer_detail_screen.dart
 //
 // Full ledger for one dealer: purchases and repayments interleaved,
-// newest first, like a bank statement — with a running balance
+// newest first, like a bank statement : with a running balance
 // computed for display (recomputed from full history each time, not
 // stored, to guarantee correctness even after deletions).
 
@@ -194,8 +194,8 @@ class _LedgerTile extends StatelessWidget {
           color: row.isCredit ? Colors.deepOrange : Colors.green,
         ),
         title: Text(row.title),
-        subtitle: Text('$dateStr · ${row.subtitle}'
-            '${row.note != null ? ' · ${row.note}' : ''}'),
+        subtitle: Text('$dateStr, ${row.subtitle}'
+            '${row.note != null ? ', ${row.note}' : ''}'),
         trailing: Text(
           '${row.isCredit ? '+Rs ' : '-Rs '}${row.amount.toStringAsFixed(0)}',
           style: TextStyle(

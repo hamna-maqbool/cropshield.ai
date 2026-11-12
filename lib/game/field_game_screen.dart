@@ -1,6 +1,6 @@
 // field_game_screen.dart
 //
-// "My Field" — an 8-week season simulation game for farmers.
+// "My Field" : an 8-week season simulation game for farmers.
 // Farmer picks a crop, then makes weekly decisions (spray / ignore)
 // when disease events hit, using REAL leaf photos from the dataset.
 // At the end, they see their yield %, profit, and a badge.
@@ -136,7 +136,7 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
       _health = (_health - damage).clamp(0, 100);
       _awaitingDecision = false;
       _lastOutcomeMessage =
-          'You ignored it. The disease spread — health dropped by $damage.';
+          'You ignored it. The disease spread. health dropped by $damage.';
     });
   }
 
@@ -223,7 +223,7 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
           const SizedBox(height: 8),
           Text(
             'Manage 8 weeks of your crop. Spray or wait when disease '
-            'hits — see your final harvest!',
+            'hits. see your final harvest!',
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium
@@ -492,7 +492,7 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
           Text(
             profitPositive
                 ? 'You made a profit this season!'
-                : 'You lost money this season — try spraying earlier next time.',
+                : 'You lost money this season. try spraying earlier next time.',
             style: TextStyle(
               color: profitPositive ? AppColors.forest : AppColors.clay,
               fontWeight: FontWeight.w600,

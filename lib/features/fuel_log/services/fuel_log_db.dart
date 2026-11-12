@@ -1,6 +1,6 @@
 // fuel_log_db.dart
 //
-// Local SQLite storage for fuel entries. Works fully offline — no
+// Local SQLite storage for fuel entries. Works fully offline : no
 // network needed to log a fill-up. If you later add a backend, this
 // is the single place to add a sync queue (mark rows unsynced, push
 // them when connectivity returns).
@@ -100,7 +100,7 @@ class FuelLogDb {
     return rows.map(FuelEntry.fromMap).toList();
   }
 
-  /// Distinct field names that have at least one entry — used to build
+  /// Distinct field names that have at least one entry : used to build
   /// the summary list without hardcoding field names anywhere.
   Future<List<String>> getDistinctFieldNames() async {
     final db = await database;
@@ -110,7 +110,7 @@ class FuelLogDb {
     return rows.map((r) => r['fieldName'] as String).toList();
   }
 
-  /// Rolled-up totals per field — this is what powers the "history" view.
+  /// Rolled-up totals per field : this is what powers the "history" view.
   Future<List<FieldFuelSummary>> getFieldSummaries() async {
     final fieldNames = await getDistinctFieldNames();
     final summaries = <FieldFuelSummary>[];

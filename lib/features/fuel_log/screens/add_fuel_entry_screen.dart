@@ -253,7 +253,7 @@ class _AddFuelEntryScreenState extends State<AddFuelEntryScreen> {
 }
 
 /// Text field with tap-to-fill suggestion chips below it, built from
-/// past entries. Not a full Autocomplete widget on purpose — chips are
+/// past entries. Not a full Autocomplete widget on purpose : chips are
 /// easier to tap with dirty/gloved hands than a dropdown search list.
 class _AutocompleteField extends StatelessWidget {
   const _AutocompleteField({

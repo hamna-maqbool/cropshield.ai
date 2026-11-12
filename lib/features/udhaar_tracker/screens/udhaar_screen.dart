@@ -121,32 +121,39 @@ class _OverallDebtCard extends StatelessWidget {
     final isClear = totalOutstanding <= 0;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: isClear ? AppColors.success : AppColors.soil,
-        borderRadius: BorderRadius.circular(16),
+      padding: const EdgeInsets.only(bottom: 16),
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: AppColors.parchment),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             isClear ? 'No outstanding credit' : 'Total you owe',
-            style: const TextStyle(color: Colors.white70, fontSize: 13),
+            style: TextStyle(
+              color: isClear ? AppColors.success : AppColors.textMuted,
+              fontSize: 13,
+            ),
           ),
           const SizedBox(height: 6),
           Text(
             totalOutstanding.toStringAsFixed(0),
-            style: const TextStyle(
-                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: isClear ? AppColors.success : AppColors.textPrimary,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           if (!isClear) ...[
             const SizedBox(height: 10),
             Row(
               children: [
-                const Icon(Icons.store_rounded, color: Colors.white70, size: 16),
+                const Icon(Icons.store_rounded, color: AppColors.stone, size: 16),
                 const SizedBox(width: 6),
                 Text('across $dealerCount dealer${dealerCount == 1 ? '' : 's'}',
-                    style: const TextStyle(color: Colors.white70)),
+                    style: const TextStyle(color: AppColors.textMuted)),
               ],
             ),
           ],
@@ -170,32 +177,24 @@ class _DealerCard extends StatelessWidget {
     final dueSoon = summary.nearestDueDate != null &&
         summary.nearestDueDate!.difference(DateTime.now()).inDays <= 7;
 
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: Theme.of(context).dividerColor),
-      ),
+    return Material(
+      color: Colors.white,
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
         onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+        splashColor: Colors.transparent,
+        highlightColor: AppColors.parchment,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: AppColors.parchment),
+            ),
+          ),
           child: Row(
             children: [
-              Container(
-                width: 46,
-                height: 46,
-                decoration: BoxDecoration(
-                  color: isSettled
-                      ? AppColors.success.withValues(alpha: 0.12)
-                      : AppColors.soil.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(Icons.store_rounded,
-                    color: isSettled ? AppColors.success : AppColors.soil),
-              ),
+              Icon(Icons.store_rounded,
+                  color: isSettled ? AppColors.success : AppColors.soil,
+                  size: 22),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
@@ -207,7 +206,7 @@ class _DealerCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       '${summary.entryCount} purchase${summary.entryCount == 1 ? '' : 's'}'
-                      '${dueSoon ? ' · due soon' : ''}',
+                      '${dueSoon ? ', due soon' : ''}',
                       style: TextStyle(
                         fontSize: 12,
                         color: dueSoon
@@ -230,7 +229,7 @@ class _DealerCard extends StatelessWidget {
                       color: isSettled ? AppColors.success : AppColors.soil,
                     ),
                   ),
-                  const Icon(Icons.chevron_right_rounded, size: 18),
+                  const Icon(Icons.chevron_right, size: 18),
                 ],
               ),
             ],

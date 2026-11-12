@@ -102,7 +102,7 @@ class _TextInputScreenState extends State<TextInputScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Type what you observe — yellowing, spots, wilting, or any other visible signs.',
+                'Type what you observe: yellowing, spots, wilting, or any other visible signs.',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.textMuted,
                     ),

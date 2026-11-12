@@ -70,7 +70,7 @@ class PlayerComponent extends PositionComponent
   }
 
   void moveToLane(int newLane) {
-    // int.clamp() returns num, not int — clamp manually to keep `lane`
+    // int.clamp() returns num, not int : clamp manually to keep `lane`
     // strictly typed as int (see field_runner_game.dart for the same
     // gotcha with doubles).
     final maxLane = laneXPositions.length - 1;

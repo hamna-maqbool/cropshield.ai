@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
 
-  // Sample history data — replace with real local storage later
+  // Sample history for now. Later we can load from local storage.
   static const List<Map<String, dynamic>> _sampleHistory = [
     {
       'disease': 'Early Blight',
@@ -56,7 +56,7 @@ class HistoryScreen extends StatelessWidget {
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Clear history — coming soon.'),
+                  content: Text('Clear history is coming soon.'),
                 ),
               );
             },
@@ -124,7 +124,7 @@ class _HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 14),
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: AppColors.parchment),
@@ -132,15 +132,7 @@ class _HistoryCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(icon, color: color, size: 22),
-          ),
+          Icon(icon, color: color, size: 22),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
@@ -151,33 +143,12 @@ class _HistoryCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Text(
-                      method,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: AppColors.textMuted,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Container(
-                      width: 4,
-                      height: 4,
-                      decoration: const BoxDecoration(
-                        color: AppColors.textMuted,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      date,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: AppColors.textMuted,
-                      ),
-                    ),
-                  ],
+                Text(
+                  '$method, $date',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppColors.textMuted,
+                  ),
                 ),
               ],
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Agriculture-inspired palette for Crop Shield AI.
+// Main colors for Crop Shield AI.
 abstract final class AppColors {
   static const Color forest = Color(0xFF1B4332);
   static const Color moss = Color(0xFF2D6A4F);
@@ -12,13 +12,15 @@ abstract final class AppColors {
   static const Color wheat = Color(0xFFD4A373);
   static const Color straw = Color(0xFFE9C46A);
 
-  static const Color cream = Color(0xFFF8F5F0);
-  static const Color parchment = Color(0xFFEDE8DF);
-  static const Color stone = Color(0xFF6B705C);
+  // Page background stays white.
+  static const Color cream = Color(0xFFFFFFFF);
+  // Light border / divider color.
+  static const Color parchment = Color(0xFFE5E7EB);
+  static const Color stone = Color(0xFF6B7280);
 
-  static const Color textPrimary = Color(0xFF1A1F16);
-  static const Color textSecondary = Color(0xFF4A5240);
-  static const Color textMuted = Color(0xFF7A8270);
+  static const Color textPrimary = Color(0xFF111827);
+  static const Color textSecondary = Color(0xFF374151);
+  static const Color textMuted = Color(0xFF6B7280);
 
   static const Color danger = Color(0xFFC1121F);
   static const Color success = Color(0xFF40916C);

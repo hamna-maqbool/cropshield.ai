@@ -200,7 +200,7 @@ class _HeroCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '$cropLabel · ${areaInAcres.toStringAsFixed(1)} acres',
+                  '$cropLabel, ${areaInAcres.toStringAsFixed(1)} acres',
                   style: GoogleFonts.dmSans(
                     color: Colors.white70,
                     fontSize: 12.5,

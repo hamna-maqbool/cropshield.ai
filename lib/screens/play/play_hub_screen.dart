@@ -16,45 +16,48 @@ class PlayHubScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pad = AppSpacing.pagePadding(context);
+
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.pageH,
-            12,
-            AppSpacing.pageH,
-            24,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: AppSpacing.contentMaxWidth(context),
+            ),
+            child: ListView(
+              padding: EdgeInsets.fromLTRB(pad, 12, pad, 24),
+              children: [
+                Text(
+                  'Play and Learn',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Fun mini games that teach real farming decisions.',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppColors.textMuted,
+                      ),
+                ),
+                const SizedBox(height: 20),
+                FeatureRow(
+                  title: 'Play: My Field',
+                  subtitle:
+                      'Manage a virtual field for 8 weeks. Grow, spray, and survive!',
+                  icon: Icons.videogame_asset_rounded,
+                  color: AppColors.moss,
+                  onTap: () => _pushRoot(context, const FieldGameScreen()),
+                ),
+                FeatureRow(
+                  title: 'Play: Field Runner',
+                  subtitle: 'Dodge pests and collect leaves. How far can you run?',
+                  icon: Icons.directions_run_rounded,
+                  color: AppColors.clay,
+                  onTap: () => _pushRoot(context, const RunnerGameScreen()),
+                ),
+              ],
+            ),
           ),
-          children: [
-            Text(
-              'Play & Learn',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'Fun mini-games that teach real farming decisions.',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textMuted,
-                  ),
-            ),
-            const SizedBox(height: 20),
-            FeatureRow(
-              title: 'Play: My Field',
-              subtitle:
-                  'Manage a virtual field for 8 weeks — grow, spray, survive!',
-              icon: Icons.videogame_asset_rounded,
-              color: AppColors.moss,
-              onTap: () => _pushRoot(context, const FieldGameScreen()),
-            ),
-            const SizedBox(height: 10),
-            FeatureRow(
-              title: 'Play: Field Runner',
-              subtitle: 'Dodge pests, collect leaves — how far can you run?',
-              icon: Icons.directions_run_rounded,
-              color: AppColors.clay,
-              onTap: () => _pushRoot(context, const RunnerGameScreen()),
-            ),
-          ],
         ),
       ),
     );

@@ -73,7 +73,7 @@ class YieldPredictionResult {
   double get roiPercent => totalCost == 0 ? 0 : (profit / totalCost) * 100;
 }
 
-/// Pure, deterministic, fully-offline calculation — no model file, no
+/// Pure, deterministic, fully-offline calculation : no model file, no
 /// network call. Every multiplier traces back to either published Punjab
 /// agronomic data or the app's own disease-detection result, and every
 /// step is surfaced to the farmer via [YieldPredictionResult.steps].
@@ -86,7 +86,7 @@ class YieldPredictorEngine {
     steps.add(AdjustmentStep(
       'Baseline (${baseline.label})',
       1.0,
-      '${runningYield.toStringAsFixed(1)} maunds/acre — regional average',
+      '${runningYield.toStringAsFixed(1)} maunds/acre, regional average',
     ));
 
     void applyStep(String label, double multiplier, String note) {
@@ -95,7 +95,7 @@ class YieldPredictorEngine {
     }
 
     applyStep(
-      'Soil — ${soilLabel(input.soil)}',
+      'Soil: ${soilLabel(input.soil)}',
       soilMultiplier(input.soil),
       soilMultiplier(input.soil) >= 1.0
           ? 'Favorable water and nutrient retention'
@@ -103,7 +103,7 @@ class YieldPredictorEngine {
     );
 
     applyStep(
-      'Irrigation — ${irrigationLabel(input.irrigation)}',
+      'Irrigation: ${irrigationLabel(input.irrigation)}',
       irrigationMultiplier(input.irrigation),
       input.irrigation == IrrigationType.canal
           ? 'Consistent, silt-rich water supply'
@@ -111,17 +111,17 @@ class YieldPredictorEngine {
     );
 
     applyStep(
-      'Fertilizer — ${fertilizerLabel(input.fertilizer)}',
+      'Fertilizer: ${fertilizerLabel(input.fertilizer)}',
       fertilizerMultiplier(input.fertilizer),
       input.fertilizer == FertilizerLevel.high
-          ? 'Above recommended dose — diminishing returns beyond this point'
+          ? 'Above recommended dose. Diminishing returns beyond this point'
           : input.fertilizer == FertilizerLevel.low
               ? 'Below recommended nutrient dose'
               : 'Matches recommended nutrient dose',
     );
 
     applyStep(
-      'Sowing time — ${sowingLabel(input.sowing)}',
+      'Sowing time: ${sowingLabel(input.sowing)}',
       sowingMultiplier(input.sowing),
       input.sowing == SowingTime.late
           ? 'Delayed sowing shortens the growth window'
@@ -131,7 +131,7 @@ class YieldPredictorEngine {
     );
 
     applyStep(
-      'Crop health — ${diseaseLabel(input.disease)}'
+      'Crop health: ${diseaseLabel(input.disease)}'
       '${input.diseaseAutoDetected ? ' (from latest scan)' : ''}',
       diseaseMultiplier(input.disease),
       input.disease == DiseaseSeverity.healthy

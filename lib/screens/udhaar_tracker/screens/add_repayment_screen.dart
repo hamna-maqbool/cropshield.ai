@@ -2,7 +2,7 @@
 //
 // Logs money paid back to a dealer. Kept deliberately separate from
 // the credit-entry form (rather than one shared "transaction" form)
-// because the fields genuinely differ — a repayment has no item,
+// because the fields genuinely differ : a repayment has no item,
 // quantity, or category, just an amount.
 
 import 'package:flutter/material.dart';
@@ -68,7 +68,7 @@ class _AddRepaymentScreenState extends State<AddRepaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Log Repayment — ${widget.dealer.name}')),
+      appBar: AppBar(title: Text('Log Repayment : ${widget.dealer.name}')),
       body: Form(
         key: _formKey,
         child: ListView(

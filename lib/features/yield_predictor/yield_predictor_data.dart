@@ -1,14 +1,14 @@
 /// Data layer for the Yield & Profit Predictor.
 ///
 /// Baseline yields are grounded in published figures for Punjab, Pakistan:
-/// - Cotton (seed cotton / phutti): Punjab average ~9–11 maunds/acre
+/// Cotton (seed cotton / phutti): Punjab average ~9 to 11 maunds/acre
 ///   (Pakistan Cotton Ginners Association / Business Recorder, 2025 season).
-/// - Rice — Basmati: Punjab average ~20–22 maunds/acre paddy
+/// - Rice : Basmati: Punjab average ~20 to 22 maunds/acre paddy
 ///   (Punjab Crop Reporting Service).
-/// - Rice — Coarse/Hybrid: Punjab average ~35 maunds/acre, well-managed
-///   fields can reach 60–80 (Rice Research Institute, Kala Shah Kaku).
+/// - Rice : Coarse/Hybrid: Punjab average ~35 maunds/acre, well-managed
+///   fields can reach 60 to 80 (Rice Research Institute, Kala Shah Kaku).
 ///
-/// Prices and per-acre costs are seeded with reasonable, editable defaults —
+/// Prices and per-acre costs are seeded with reasonable, editable defaults : 
 /// these move weekly/seasonally, so the UI always lets the farmer override
 /// them with the current mandi rate before calculating. 1 maund = 40 kg.
 library;
@@ -23,7 +23,7 @@ enum FertilizerLevel { low, medium, high }
 
 enum SowingTime { early, onTime, late }
 
-/// Disease severity — designed to be auto-populated from the app's own
+/// Disease severity : designed to be auto-populated from the app's own
 /// disease-detection scan result, tying the yield predictor directly to
 /// the CNN model output. Falls back to a manual picker if no scan exists.
 enum DiseaseSeverity { healthy, mild, moderate, severe }
@@ -70,11 +70,11 @@ const Map<CropType, CropBaseline> cropBaselines = {
     defaultLaborCostPerAcre: 18000,
     defaultOtherCostPerAcre: 6000,
     sourceNote:
-        'Punjab average seed-cotton (phutti) yield ~9–11 maunds/acre; '
+        'Punjab average seed-cotton (phutti) yield ~9 to 11 maunds/acre; '
         '2025 government support price ~Rs 8,500/maund.',
   ),
   CropType.riceBasmati: CropBaseline(
-    label: 'Rice — Basmati',
+    label: 'Rice : Basmati',
     baselineMaundsPerAcre: 22,
     defaultPricePerMaund: 4200,
     defaultSeedCostPerAcre: 2500,
@@ -83,11 +83,11 @@ const Map<CropType, CropBaseline> cropBaselines = {
     defaultLaborCostPerAcre: 18000,
     defaultOtherCostPerAcre: 6000,
     sourceNote:
-        'Punjab Basmati paddy average ~20–22 maunds/acre '
+        'Punjab Basmati paddy average ~20 to 22 maunds/acre '
         '(Punjab Crop Reporting Service).',
   ),
   CropType.riceCoarse: CropBaseline(
-    label: 'Rice — Coarse / Hybrid',
+    label: 'Rice : Coarse / Hybrid',
     baselineMaundsPerAcre: 35,
     defaultPricePerMaund: 3000,
     defaultSeedCostPerAcre: 2500,
@@ -97,7 +97,7 @@ const Map<CropType, CropBaseline> cropBaselines = {
     defaultOtherCostPerAcre: 6000,
     sourceNote:
         'Punjab coarse/hybrid paddy average ~35 maunds/acre, well-managed '
-        'fields reach 60–80 (Rice Research Institute, Kala Shah Kaku).',
+        'fields reach 60 to 80 (Rice Research Institute, Kala Shah Kaku).',
   ),
 };
 

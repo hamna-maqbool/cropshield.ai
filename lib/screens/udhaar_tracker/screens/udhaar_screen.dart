@@ -212,7 +212,7 @@ class _DealerCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       '${summary.entryCount} purchase${summary.entryCount == 1 ? '' : 's'}'
-                      '${dueSoon ? ' · due soon' : ''}',
+                      '${dueSoon ? ', due soon' : ''}',
                       style: TextStyle(
                         fontSize: 12,
                         color: dueSoon

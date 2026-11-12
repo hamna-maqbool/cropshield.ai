@@ -45,7 +45,7 @@ abstract class FallingItemComponent extends PositionComponent
     super.update(dt);
     position.y += fallSpeed * dt;
 
-    // Once well past the player's row, remove — cleanup happens here so
+    // Once well past the player's row, remove : cleanup happens here so
     // the game loop never has to scan a growing list by hand.
     if (position.y > gameRef.size.y + size.y) {
       removeFromParent();

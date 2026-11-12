@@ -19,71 +19,71 @@ class ToolsHubScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pad = AppSpacing.pagePadding(context);
+
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.pageH,
-            12,
-            AppSpacing.pageH,
-            24,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: AppSpacing.contentMaxWidth(context),
+            ),
+            child: ListView(
+              padding: EdgeInsets.fromLTRB(pad, 12, pad, 24),
+              children: [
+                Text(
+                  'Farming Tools',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Guides and calculators for better crop management.',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppColors.textMuted,
+                      ),
+                ),
+                const SizedBox(height: 20),
+                FeatureRow(
+                  title: 'Fertilizer and Nutrition Guide',
+                  subtitle:
+                      'Get کھاد recommendations by crop and growth stage',
+                  icon: Icons.grass_rounded,
+                  color: AppColors.moss,
+                  onTap: () => context.push(AppRoutes.fertilizer),
+                ),
+                FeatureRow(
+                  title: 'Pesticide Calculator',
+                  subtitle:
+                      'Get کیڑے مار دوا dose, tank mix, and safe harvest date',
+                  icon: Icons.science_rounded,
+                  color: AppColors.clay,
+                  onTap: () => context.push(AppRoutes.pesticide),
+                ),
+                FeatureRow(
+                  title: 'Yield and Profit Predictor',
+                  subtitle:
+                      'Get متوقع پیداوار and profit estimate for your field',
+                  icon: Icons.agriculture_rounded,
+                  color: AppColors.forest,
+                  onTap: () => _pushRoot(context, const YieldPredictorScreen()),
+                ),
+                FeatureRow(
+                  title: 'Tractor Fuel Log',
+                  subtitle: 'Track ڈیزل fill ups and cost per field',
+                  icon: Icons.local_gas_station_rounded,
+                  color: AppColors.soil,
+                  onTap: () => _pushRoot(context, const FuelLogScreen()),
+                ),
+                FeatureRow(
+                  title: 'Input Credit (Udhaar) Tracker',
+                  subtitle: 'Track ادھار from dealers and repayments',
+                  icon: Icons.receipt_long_rounded,
+                  color: AppColors.clay,
+                  onTap: () => _pushRoot(context, const UdhaarScreen()),
+                ),
+              ],
+            ),
           ),
-          children: [
-            Text(
-              'Farming Tools',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'Guides and calculators for better crop management.',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textMuted,
-                  ),
-            ),
-            const SizedBox(height: 20),
-            FeatureRow(
-              title: 'Fertilizer & Nutrition Guide',
-              subtitle:
-                  'Get کھاد recommendations by crop and growth stage',
-              icon: Icons.grass_rounded,
-              color: AppColors.moss,
-              onTap: () => context.push(AppRoutes.fertilizer),
-            ),
-            const SizedBox(height: 10),
-            FeatureRow(
-              title: 'Pesticide Calculator',
-              subtitle:
-                  'Get کیڑے مار دوا dose, tank-mix, and safe harvest date',
-              icon: Icons.science_rounded,
-              color: AppColors.clay,
-              onTap: () => context.push(AppRoutes.pesticide),
-            ),
-            const SizedBox(height: 10),
-            FeatureRow(
-              title: 'Yield & Profit Predictor',
-              subtitle:
-                  'Get متوقع پیداوار and profit estimate for your field',
-              icon: Icons.agriculture_rounded,
-              color: AppColors.forest,
-              onTap: () => _pushRoot(context, const YieldPredictorScreen()),
-            ),
-            const SizedBox(height: 10),
-            FeatureRow(
-              title: 'Tractor Fuel Log',
-              subtitle: 'Track ڈیزل fill-ups and cost per field',
-              icon: Icons.local_gas_station_rounded,
-              color: AppColors.soil,
-              onTap: () => _pushRoot(context, const FuelLogScreen()),
-            ),
-            const SizedBox(height: 10),
-            FeatureRow(
-              title: 'Input Credit (Udhaar) Tracker',
-              subtitle: 'Track ادھار from dealers and repayments',
-              icon: Icons.receipt_long_rounded,
-              color: AppColors.clay,
-              onTap: () => _pushRoot(context, const UdhaarScreen()),
-            ),
-          ],
         ),
       ),
     );

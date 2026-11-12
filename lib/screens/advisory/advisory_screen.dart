@@ -16,7 +16,7 @@ class AdvisoryScreen extends StatelessWidget {
 
   final ScanResult result;
 
-  // Static advisory data per disease — replace with real data later
+  // Static advisory text for now. Can swap in real data later.
   static const Map<String, Map<String, dynamic>> _advisoryData = {
     'default': {
       'severity': 'Moderate',
@@ -34,7 +34,7 @@ class AdvisoryScreen extends StatelessWidget {
         'Monitor crops regularly for early signs of disease.',
         'Maintain proper soil drainage and avoid waterlogging.',
       ],
-      'recovery': '2–4 weeks with proper treatment and care.',
+      'recovery': '2 to 4 weeks with proper treatment and care.',
     },
   };
 
@@ -68,10 +68,11 @@ class AdvisoryScreen extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
-              decoration: BoxDecoration(
-                color: AppColors.forest,
-                borderRadius: BorderRadius.circular(16),
+              padding: const EdgeInsets.only(bottom: 16),
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: AppColors.parchment),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,68 +80,50 @@ class AdvisoryScreen extends StatelessWidget {
                   Text(
                     'Advisory for',
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColors.leaf,
+                          color: AppColors.moss,
                           fontSize: 12,
                         ),
                   ),
                   const SizedBox(height: 6),
                   Text(
                     result.diseaseName,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 12),
                   Wrap(
-                    spacing: 8,
+                    spacing: 16,
                     runSpacing: 8,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: severityColor.withValues(alpha: 0.25),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.warning_amber_rounded,
-                                size: 14, color: severityColor),
-                            const SizedBox(width: 4),
-                            Text(
-                              '$severity severity',
-                              style: TextStyle(
-                                color: severityColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.warning_amber_rounded,
+                              size: 14, color: severityColor),
+                          const SizedBox(width: 4),
+                          Text(
+                            '$severity severity',
+                            style: TextStyle(
+                              color: severityColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(Icons.schedule_rounded,
-                                size: 14, color: AppColors.leaf),
-                            const SizedBox(width: 4),
-                            Text(
-                              'Recovery: $recovery',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.schedule_rounded,
+                              size: 14, color: AppColors.moss),
+                          const SizedBox(width: 4),
+                          Text(
+                            'Recovery: $recovery',
+                            style: const TextStyle(
+                              color: AppColors.textSecondary,
+                              fontSize: 12,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -297,21 +280,14 @@ class _StepRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             width: 24,
-            height: 24,
-            decoration: BoxDecoration(
-              color: AppColors.forest,
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Center(
-              child: Text(
-                '$number',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+            child: Text(
+              '$number.',
+              style: const TextStyle(
+                color: AppColors.forest,
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ),

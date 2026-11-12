@@ -1,7 +1,7 @@
 // feedback_service.dart
 //
 // Saves feedback locally on the phone using SharedPreferences.
-// Works fully offline — important for farmers in low-signal areas.
+// Works fully offline : important for farmers in low-signal areas.
 // If you later add a backend/Firebase, only this file needs to change.
 //
 // Add this to pubspec.yaml if not already there:
@@ -30,7 +30,7 @@ class FeedbackService {
     return all.any((e) => e.scanId == scanId);
   }
 
-  // Get all saved feedback — useful for a "Feedback History" screen
+  // Get all saved feedback : useful for a "Feedback History" screen
   // or for your FYP demo/evaluation showing collected data.
   Future<List<FeedbackEntry>> getAllFeedback() async {
     final prefs = await SharedPreferences.getInstance();
