@@ -37,7 +37,7 @@ class PrimaryButton extends StatelessWidget {
           minimumSize: const Size.fromHeight(48),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.sm),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
           ),
         ),
         child: isLoading

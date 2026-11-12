@@ -27,9 +27,11 @@ abstract final class AppSpacing {
   }
 }
 
-// Keep corners sharp for a clean look.
 abstract final class AppRadius {
-  static const double sm = 2;
-  static const double md = 4;
-  static const double lg = 4;
+  // Soft corners for inputs and small UI bits.
+  static const double sm = 8;
+  static const double md = 12;
+  static const double lg = 16;
+  // Full pill shape for all buttons (radius 100).
+  static const double pill = 100;
 }

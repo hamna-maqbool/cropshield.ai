@@ -250,8 +250,11 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
               icon: const Icon(Icons.play_arrow_rounded),
               label: const Text('Start Season'),
               style: FilledButton.styleFrom(
-                backgroundColor: AppColors.forest,
+                backgroundColor: AppColors.moss,
                 padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100),
+                ),
               ),
             ),
           ),
@@ -363,6 +366,9 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
                     style: FilledButton.styleFrom(
                       backgroundColor: AppColors.moss,
                       padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
                     ),
                   ),
                 ),
@@ -377,6 +383,9 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       side: const BorderSide(color: AppColors.clay),
                       foregroundColor: AppColors.clay,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
                     ),
                   ),
                 ),
@@ -393,8 +402,11 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
                 label: Text(
                     _week >= totalWeeks ? 'See Results' : 'Next Week'),
                 style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.forest,
+                  backgroundColor: AppColors.moss,
                   padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
                 ),
               ),
             ),
@@ -507,8 +519,11 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
               icon: const Icon(Icons.replay_rounded),
               label: const Text('Play Again'),
               style: FilledButton.styleFrom(
-                backgroundColor: AppColors.forest,
+                backgroundColor: AppColors.moss,
                 padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100),
+                ),
               ),
             ),
           ),
@@ -521,6 +536,9 @@ class _FieldGameScreenState extends State<FieldGameScreen> {
               label: const Text('Back to Home'),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100),
+                ),
               ),
             ),
           ),

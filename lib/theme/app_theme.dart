@@ -121,7 +121,7 @@ abstract final class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           minimumSize: const Size(0, 48),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.sm),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
           ),
           textStyle: GoogleFonts.dmSans(
             fontWeight: FontWeight.w600,
@@ -138,7 +138,22 @@ abstract final class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           minimumSize: const Size(0, 48),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.sm),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
+          ),
+          textStyle: GoogleFonts.dmSans(
+            fontWeight: FontWeight.w600,
+            fontSize: 15,
+          ),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.moss,
+          side: const BorderSide(color: AppColors.moss),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          minimumSize: const Size(0, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.pill),
           ),
           textStyle: GoogleFonts.dmSans(
             fontWeight: FontWeight.w600,
@@ -149,6 +164,9 @@ abstract final class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.moss,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.pill),
+          ),
           textStyle: GoogleFonts.dmSans(
             fontWeight: FontWeight.w600,
             fontSize: 14,
@@ -163,9 +181,7 @@ abstract final class AppTheme {
         hoverElevation: 0,
         highlightElevation: 0,
         disabledElevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppRadius.sm)),
-        ),
+        shape: StadiumBorder(),
         extendedPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       ),
       chipTheme: ChipThemeData(
@@ -182,9 +198,9 @@ abstract final class AppTheme {
           fontWeight: FontWeight.w600,
           color: Colors.white,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.sm),
+          borderRadius: BorderRadius.circular(AppRadius.pill),
           side: const BorderSide(color: AppColors.parchment),
         ),
         side: const BorderSide(color: AppColors.parchment),
@@ -201,7 +217,7 @@ abstract final class AppTheme {
         behavior: SnackBarBehavior.floating,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.sm),
+          borderRadius: BorderRadius.circular(AppRadius.pill),
         ),
       ),
     );

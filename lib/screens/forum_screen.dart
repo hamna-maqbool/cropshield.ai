@@ -56,6 +56,13 @@ class _ForumScreenState extends State<ForumScreen> {
                     label: Text(crop),
                     selected: selected,
                     selectedColor: AppColors.moss,
+                    showCheckmark: false,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      side: BorderSide(
+                        color: selected ? AppColors.moss : AppColors.parchment,
+                      ),
+                    ),
                     labelStyle: TextStyle(
                       color: selected ? Colors.white : AppColors.textSecondary,
                       fontWeight: FontWeight.w600,

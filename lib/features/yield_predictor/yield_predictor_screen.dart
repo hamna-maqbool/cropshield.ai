@@ -335,9 +335,10 @@ class _YieldPredictorScreenState extends State<YieldPredictorScreen> {
                 backgroundColor: AppColors.forest,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(100),
                 ),
                 elevation: 0,
+                shadowColor: Colors.transparent,
               ),
               child: Text(
                 'Calculate Yield & Profit',

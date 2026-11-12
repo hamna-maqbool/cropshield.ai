@@ -1,19 +1,11 @@
-// runner_game_screen.dart
-//
-// "Field Runner" : Flame-powered 3-lane endless runner. The farmer
-// auto-runs down crop rows; swipe left/right to switch lanes, swipe up
-// to jump ground pests, swipe down to duck flying pests. Collect leaves
-// for score, grab power-ups (shield / growth boost) for an edge.
-//
-// This file is intentionally "dumb" : all game state and rules live in
-// FieldRunnerGame. This widget just hosts the GameWidget, translates
-// swipes into calls on the game, and renders the three overlay screens
-// (ready / paused / game over) as ordinary Flutter widgets driven by
-// plain setState : no extra state-management machinery needed.
+// Field Runner screen. Game rules live in FieldRunnerGame.
+// This file hosts the game view and the ready / pause / game over screens.
 
 import 'package:flame/game.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:crop_shield_ai/theme/app_colors.dart';
+import 'package:crop_shield_ai/theme/app_spacing.dart';
 import 'field_runner_game.dart';
 import 'models/runner_enums.dart';
 
@@ -46,8 +38,7 @@ class _RunnerGameScreenState extends State<RunnerGameScreen> {
 
   void _handleSwipe(DragEndDetails details) {
     final v = details.velocity.pixelsPerSecond;
-    // Pick whichever axis had the stronger flick so a slightly-diagonal
-    // swipe still reads as a clean directional input.
+    // Prefer the stronger axis so a slight diagonal swipe still works.
     if (v.dx.abs() > v.dy.abs()) {
       if (v.dx > 250) {
         _game.moveLane(1);
@@ -73,10 +64,17 @@ class _RunnerGameScreenState extends State<RunnerGameScreen> {
     setState(() {});
   }
 
+  bool get _isMenu =>
+      _game.state == RunnerGameState.ready ||
+      _game.state == RunnerGameState.paused ||
+      _game.state == RunnerGameState.gameOver;
+
   @override
   Widget build(BuildContext context) {
+    // GameWidget must stay mounted so Flame can load player / hud.
+    // Ready screen just covers it with a light overlay.
     return Scaffold(
-      backgroundColor: AppColors.forest,
+      backgroundColor: _isMenu ? Colors.white : AppColors.forest,
       body: SafeArea(
         child: Stack(
           children: [
@@ -112,29 +110,38 @@ class _RunnerGameScreenState extends State<RunnerGameScreen> {
 
   Widget _buildTopBar() {
     return Positioned(
-      top: 8,
-      left: 8,
-      child: SafeArea(
-        child: IconButton(
-          onPressed: () {
-            if (_game.state == RunnerGameState.playing ||
-                _game.state == RunnerGameState.paused) {
-              _togglePause();
-            } else {
-              Navigator.of(context).pop();
-            }
-          },
-          icon: Icon(
-            _game.state == RunnerGameState.playing
-                ? Icons.pause_circle_filled_rounded
-                : Icons.arrow_back_rounded,
-            color: Colors.white,
-          ),
+      top: 4,
+      left: 4,
+      child: IconButton(
+        onPressed: () {
+          if (_game.state == RunnerGameState.playing ||
+              _game.state == RunnerGameState.paused) {
+            _togglePause();
+          } else {
+            Navigator.of(context).pop();
+          }
+        },
+        icon: Icon(
+          _game.state == RunnerGameState.playing
+              ? CupertinoIcons.pause_circle_fill
+              : CupertinoIcons.back,
+          color: _isMenu ? AppColors.textPrimary : Colors.white,
         ),
       ),
     );
   }
 }
+
+ButtonStyle get _pillMoss => FilledButton.styleFrom(
+      backgroundColor: AppColors.moss,
+      foregroundColor: Colors.white,
+      elevation: 0,
+      shadowColor: Colors.transparent,
+      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadius.pill),
+      ),
+    );
 
 class _ReadyOverlay extends StatelessWidget {
   const _ReadyOverlay({required this.game, required this.onStart});
@@ -143,61 +150,51 @@ class _ReadyOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black.withValues(alpha: 0.55),
+    return ColoredBox(
+      color: Colors.white,
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(28),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               const Icon(
-                Icons.directions_run_rounded,
+                CupertinoIcons.person_crop_circle,
                 size: 56,
-                color: AppColors.leaf,
+                color: AppColors.moss,
+              ),
+              const SizedBox(height: 14),
+              Text(
+                'Field Runner',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
               const SizedBox(height: 12),
-              const Text(
-                'Field Runner',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
               Text(
-                'Swipe left/right to switch rows\n'
-                'Swipe up to jump 🐛  •  Swipe down to duck 🦅\n'
-                'Grab \u{1F6E1}\u{FE0F} shield and \u{1F9EA} growth boost power-ups',
+                'Swipe left or right to switch rows\n'
+                'Swipe up to jump, swipe down to duck\n'
+                'Collect shields and growth boosts',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.85),
-                  fontSize: 14,
-                  height: 1.4,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.textMuted,
+                      height: 1.45,
+                    ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 14),
               Text(
                 'Best score: ${game.best}',
-                style: const TextStyle(
-                  color: Colors.amberAccent,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: AppColors.moss,
+                    ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 28),
               FilledButton.icon(
                 onPressed: onStart,
-                icon: const Icon(Icons.play_arrow_rounded),
+                icon: const Icon(CupertinoIcons.play_fill, size: 18),
                 label: const Text('Start Running'),
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.leaf,
-                  foregroundColor: AppColors.forest,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                    vertical: 14,
-                  ),
-                ),
+                style: _pillMoss,
               ),
             ],
           ),
@@ -213,34 +210,30 @@ class _PausedOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black.withValues(alpha: 0.6),
+    return ColoredBox(
+      color: Colors.white.withValues(alpha: 0.96),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.pause_circle_filled_rounded,
-                color: Colors.white, size: 56),
+            const Icon(
+              CupertinoIcons.pause_circle,
+              color: AppColors.moss,
+              size: 56,
+            ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Paused',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: AppColors.textPrimary,
+                  ),
             ),
             const SizedBox(height: 20),
             FilledButton.icon(
               onPressed: onResume,
-              icon: const Icon(Icons.play_arrow_rounded),
+              icon: const Icon(CupertinoIcons.play_fill, size: 18),
               label: const Text('Resume'),
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.leaf,
-                foregroundColor: AppColors.forest,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-              ),
+              style: _pillMoss,
             ),
           ],
         ),
@@ -264,71 +257,61 @@ class _GameOverOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black.withValues(alpha: 0.65),
+    return ColoredBox(
+      color: Colors.white.withValues(alpha: 0.96),
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(28),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                isNewBest ? Icons.emoji_events_rounded : Icons.bug_report_rounded,
+                isNewBest
+                    ? CupertinoIcons.rosette
+                    : CupertinoIcons.flag,
                 size: 48,
-                color: isNewBest ? AppColors.straw : AppColors.leaf,
+                color: AppColors.moss,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 12),
               Text(
                 isNewBest ? 'New Best Score!' : 'Game Over',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
               const SizedBox(height: 8),
               Text(
                 'Score: $score',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Text(
                 'Best: ${game.best}',
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.75),
-                  fontSize: 14,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.textMuted,
+                    ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 28),
               FilledButton.icon(
                 onPressed: onRunAgain,
-                icon: const Icon(Icons.replay_rounded),
+                icon: const Icon(CupertinoIcons.refresh, size: 18),
                 label: const Text('Run Again'),
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.leaf,
-                  foregroundColor: AppColors.forest,
+                style: _pillMoss,
+              ),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: const Icon(CupertinoIcons.home, size: 18),
+                label: const Text('Back to Home'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.moss,
+                  side: const BorderSide(color: AppColors.moss),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 28,
                     vertical: 14,
                   ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              OutlinedButton.icon(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: const Icon(Icons.home_rounded, color: Colors.white),
-                label: const Text(
-                  'Back to Home',
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.white54),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                    vertical: 14,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.pill),
                   ),
                 ),
               ),
